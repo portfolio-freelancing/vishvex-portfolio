@@ -13,21 +13,12 @@ const WorkRequestForm = () => {
     e.preventDefault();
     setSubmitting(true);
     const form = e.currentTarget;
-    const data = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      company: (form.elements.namedItem("company") as HTMLInputElement).value,
-      projectType: (form.elements.namedItem("projectType") as HTMLSelectElement).value,
-      budget: (form.elements.namedItem("budget") as HTMLSelectElement).value,
-      description: (form.elements.namedItem("description") as HTMLTextAreaElement).value,
-      deadline: (form.elements.namedItem("deadline") as HTMLInputElement).value,
-    };
+    const formData = new FormData(form);
     try {
       await fetch("https://script.google.com/macros/s/AKfycbzl1vtX3PJMaaea-242TmOlzsvyy-pVUD-qVyxiep5af7z0BB3B_9I7MIFMQw9R-1dOLw/exec", {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: formData,
       });
       setSubmitted(true);
     } catch {
@@ -79,6 +70,7 @@ const WorkRequestForm = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
+          id="projectForm"
           onSubmit={handleSubmit}
           className="gradient-border p-8 space-y-5"
         >
