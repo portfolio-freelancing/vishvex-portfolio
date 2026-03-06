@@ -85,6 +85,12 @@ const HeroSection = () => {
           >
             Start a Project
           </a>
+          <a
+            href="#book-call"
+            className="px-8 py-3.5 rounded-lg font-medium border border-primary/50 text-primary hover:bg-primary/10 transition-all duration-300 hover:scale-105"
+          >
+            Book Strategy Call
+          </a>
         </motion.div>
       </div>
     </section>
