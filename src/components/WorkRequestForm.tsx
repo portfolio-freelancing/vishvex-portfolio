@@ -86,6 +86,7 @@ const WorkRequestForm = () => {
             <div>
               <label className="text-sm font-medium mb-1.5 block">Full Name *</label>
               <input
+                name="name"
                 required
                 type="text"
                 className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
@@ -95,6 +96,7 @@ const WorkRequestForm = () => {
             <div>
               <label className="text-sm font-medium mb-1.5 block">Email *</label>
               <input
+                name="email"
                 required
                 type="email"
                 className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
@@ -106,6 +108,7 @@ const WorkRequestForm = () => {
           <div>
             <label className="text-sm font-medium mb-1.5 block">Company <span className="text-muted-foreground">(optional)</span></label>
             <input
+              name="company"
               type="text"
               className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
               placeholder="Company name"
@@ -116,6 +119,7 @@ const WorkRequestForm = () => {
             <div>
               <label className="text-sm font-medium mb-1.5 block">Project Type *</label>
               <select
+                name="projectType"
                 required
                 className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
               >
@@ -128,6 +132,7 @@ const WorkRequestForm = () => {
             <div>
               <label className="text-sm font-medium mb-1.5 block">Budget Range *</label>
               <select
+                name="budget"
                 required
                 className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
               >
@@ -142,6 +147,7 @@ const WorkRequestForm = () => {
           <div>
             <label className="text-sm font-medium mb-1.5 block">Project Description *</label>
             <textarea
+              name="description"
               required
               rows={4}
               className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm resize-none"
@@ -152,6 +158,7 @@ const WorkRequestForm = () => {
           <div>
             <label className="text-sm font-medium mb-1.5 block">Deadline <span className="text-muted-foreground">(optional)</span></label>
             <input
+              name="deadline"
               type="date"
               className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
             />
@@ -159,11 +166,12 @@ const WorkRequestForm = () => {
 
           <button
             type="submit"
-            className="w-full py-3 rounded-lg font-medium text-primary-foreground flex items-center justify-center gap-2 transition-all duration-300 hover:opacity-90 hover:scale-[1.01]"
+            disabled={submitting}
+            className="w-full py-3 rounded-lg font-medium text-primary-foreground flex items-center justify-center gap-2 transition-all duration-300 hover:opacity-90 hover:scale-[1.01] disabled:opacity-60"
             style={{ background: "var(--gradient-primary)" }}
           >
             <Send size={16} />
-            Send Project Request
+            {submitting ? "Sending..." : "Send Project Request"}
           </button>
         </motion.form>
       </div>
