@@ -3,12 +3,6 @@ import { ExternalLink, Github } from "lucide-react";
 
 const projects = [
   {
-    title: "Discord Tournament Bot",
-    description: "A feature-rich Discord bot for managing tournaments, brackets, and competitive events with real-time updates.",
-    tech: ["Python", "Discord.py", "PostgreSQL"],
-    color: "hsl(270 80% 60%)",
-  },
-  {
     title: "AI Website Chatbot",
     description: "An intelligent chatbot powered by AI APIs that provides instant customer support and lead qualification.",
     tech: ["React", "Node.js", "OpenAI API"],
