@@ -15,10 +15,10 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass">
+    <nav className="fixed top-0 left-0 right-0 z-50 glass" role="navigation" aria-label="Main navigation">
       <div className="container-narrow flex items-center justify-between h-16">
         <a href="#" className="font-display text-xl font-bold gradient-text">
-          Lord Creation
+          Vishvex
         </a>
 
         {/* Desktop */}
@@ -45,6 +45,7 @@ const Navbar = () => {
         <button
           className="md:hidden text-foreground"
           onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>

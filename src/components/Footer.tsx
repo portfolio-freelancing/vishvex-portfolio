@@ -5,21 +5,32 @@ const quickLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+const footerServices = [
+  "AI Development",
+  "Website Development",
+  "Discord Bot Development",
+  "Automation Systems",
+  "Prompt Engineering",
+  "Web Application Development",
+  "API Integration",
+  "UI / UX Design",
+];
+
 const Footer = () => {
   return (
-    <footer className="border-t border-border py-12 px-4">
+    <footer className="border-t border-border py-12 px-4" role="contentinfo">
       <div className="container-narrow">
-        <div className="grid sm:grid-cols-3 gap-8 mb-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <span className="font-display text-xl font-bold gradient-text">Lord Creation</span>
+            <span className="font-display text-xl font-bold gradient-text">Vishvex</span>
             <p className="text-sm text-muted-foreground mt-2">
-              AI-powered development for the modern web.
+              AI-powered development agency for modern websites, automation systems, and scalable digital solutions.
             </p>
           </div>
 
           <div>
             <h4 className="font-display font-semibold text-sm mb-3">Quick Links</h4>
-            <div className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-2" aria-label="Footer navigation">
               {quickLinks.map((link) => (
                 <a
                   key={link.href}
@@ -29,7 +40,23 @@ const Footer = () => {
                   {link.label}
                 </a>
               ))}
-            </div>
+            </nav>
+          </div>
+
+          <div>
+            <h4 className="font-display font-semibold text-sm mb-3">Services</h4>
+            <ul className="flex flex-col gap-2">
+              {footerServices.map((service) => (
+                <li key={service}>
+                  <a
+                    href="#services"
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {service}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>
@@ -50,7 +77,7 @@ const Footer = () => {
 
         <div className="border-t border-border pt-6 text-center">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Lord Creation. All rights reserved.
+            © {new Date().getFullYear()} Vishvex. All rights reserved.
           </p>
         </div>
       </div>
