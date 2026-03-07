@@ -57,7 +57,7 @@ const BookCallSection = () => {
           </p>
           <div className="w-full rounded-lg overflow-hidden" style={{ minHeight: 660 }}>
             <iframe
-              src="https://calendly.com/lordesports108/30min?hide_gdpr_banner=1&background_color=13131f&text_color=f0f0f0&primary_color=7c3aed"
+              src="https://calendly.com/askvishvex/30min?hide_gdpr_banner=1&background_color=13131f&text_color=f0f0f0&primary_color=7c3aed"
               width="100%"
               height="660"
               frameBorder="0"
