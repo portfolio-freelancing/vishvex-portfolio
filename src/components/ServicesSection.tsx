@@ -1,37 +1,52 @@
 import { motion } from "framer-motion";
-import { Globe, Bot, Brain, Palette, Rocket } from "lucide-react";
+import { Globe, Bot, Brain, Palette, Rocket, Code, Workflow, Plug } from "lucide-react";
 
 const services = [
   {
+    icon: Brain,
+    title: "AI Development & Prompt Engineering",
+    description: "We design intelligent AI solutions and prompt engineering systems that power smart applications, automation workflows, and scalable digital products.",
+  },
+  {
     icon: Globe,
     title: "Website Development",
-    description: "Modern, responsive websites built with the latest frameworks and performance-first approach.",
+    description: "We build fast, modern, and responsive websites optimized for performance, SEO, and conversion-focused user experiences.",
+  },
+  {
+    icon: Code,
+    title: "Web Application Development",
+    description: "Custom web applications and SaaS platforms designed for scalability, security, and high-performance digital experiences.",
   },
   {
     icon: Bot,
     title: "Discord Bot Development",
-    description: "Custom Discord bots with moderation, automation, games, and community management features.",
+    description: "Custom Discord bots for gaming communities, startups, and businesses with moderation tools, automation features, payment integrations, and AI-powered functionality.",
   },
   {
-    icon: Brain,
-    title: "Prompt Engineering",
-    description: "Expert prompt design for ChatGPT, Claude, and other AI models to maximize output quality.",
+    icon: Workflow,
+    title: "Automation Systems",
+    description: "Automation solutions that streamline workflows, reduce manual tasks, and improve productivity through smart integrations and digital systems.",
+  },
+  {
+    icon: Plug,
+    title: "API Integration",
+    description: "Seamless API integrations connecting third-party platforms, payment systems, and automation tools to create powerful digital ecosystems.",
   },
   {
     icon: Palette,
     title: "UI / UX Design",
-    description: "Clean, intuitive interfaces with modern design principles and smooth user experiences.",
+    description: "Clean and modern user interface design focused on usability, engagement, and seamless digital experiences.",
   },
   {
     icon: Rocket,
-    title: "Website Deployment & Setup",
-    description: "Full deployment pipeline setup with CI/CD, hosting configuration, and domain management.",
+    title: "Website Deployment & Cloud Hosting",
+    description: "Professional website deployment with domain setup, cloud hosting configuration, performance optimization, and secure infrastructure.",
   },
 ];
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="section-padding">
+    <section id="services" className="section-padding" aria-labelledby="services-heading">
       <div className="container-narrow">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -41,14 +56,14 @@ const ServicesSection = () => {
           className="text-center mb-16"
         >
           <span className="text-xs uppercase tracking-widest text-primary font-medium">What We Do</span>
-          <h2 className="text-3xl md:text-4xl font-bold font-display mt-3">
-            Our <span className="gradient-text">Services</span>
+          <h2 id="services-heading" className="text-3xl md:text-4xl font-bold font-display mt-3">
+            AI & Software <span className="gradient-text">Development Services</span>
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {services.map((service, i) => (
-            <motion.div
+            <motion.article
               key={service.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +79,7 @@ const ServicesSection = () => {
               </div>
               <h3 className="font-display font-semibold text-lg mb-2">{service.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

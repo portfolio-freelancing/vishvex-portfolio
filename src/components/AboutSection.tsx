@@ -3,7 +3,7 @@ import { User, Cpu, Zap } from "lucide-react";
 
 const AboutSection = () => {
   return (
-    <section id="about" className="section-padding">
+    <section id="about" className="section-padding" aria-labelledby="about-heading">
       <div className="container-narrow">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -14,11 +14,11 @@ const AboutSection = () => {
         >
           <div>
             <span className="text-xs uppercase tracking-widest text-primary font-medium">About Us</span>
-            <h2 className="text-3xl md:text-4xl font-bold font-display mt-3 mb-6">
+            <h2 id="about-heading" className="text-3xl md:text-4xl font-bold font-display mt-3 mb-6">
               A Modern <span className="gradient-text">Development Agency</span>
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Lord Creation is a modern development agency that builds websites, AI tools, Discord bots, and automation systems for startups, creators, and online communities. We combine cutting-edge AI with clean design to deliver powerful digital solutions.
+              Vishvex is a modern AI-powered development agency that builds websites, AI tools, Discord bots, and automation systems for startups, creators, and online communities. We combine cutting-edge AI development with clean design to deliver powerful digital solutions and scalable software products.
             </p>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3">
@@ -42,7 +42,7 @@ const AboutSection = () => {
               </div>
               <div>
                 <h3 className="font-display font-semibold text-lg">Vishnu Vardhan Nayak</h3>
-                <p className="text-sm text-muted-foreground">Founder</p>
+                <p className="text-sm text-muted-foreground">Founder, Vishvex</p>
               </div>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed mb-4">
