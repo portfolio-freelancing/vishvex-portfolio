@@ -17,7 +17,7 @@ const WorkRequestForm = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbzl1vtX3PJMaaea-242TmOlzsvyy-pVUD-qVyxiep5af7z0BB3B_9I7MIFMQw9R-1dOLw/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbyBEAmwsBwSjhRst5549iby4qWnIlAJ_pAnq0biaZTuOdBEu-uTXb7O7pLw0S6LLkNMcQ/exec", {
         method: "POST",
         mode: "no-cors",
         body: formData,
