@@ -8,10 +8,12 @@ const budgetRanges = ["$100 - $500", "$500 - $1,000", "$1,000 - $5,000", "$5,000
 const WorkRequestForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
+    setError(false);
     const form = e.currentTarget;
     const formData = new FormData(form);
     try {
@@ -22,7 +24,7 @@ const WorkRequestForm = () => {
       });
       setSubmitted(true);
     } catch {
-      setSubmitted(true);
+      setError(true);
     } finally {
       setSubmitting(false);
     }
