@@ -158,6 +158,12 @@ const WorkRequestForm = () => {
             />
           </div>
 
+          {error && (
+            <p className="text-sm text-destructive text-center">
+              Something went wrong. Please try again or email us directly.
+            </p>
+          )}
+
           <button
             type="submit"
             disabled={submitting}
