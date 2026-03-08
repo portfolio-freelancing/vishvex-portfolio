@@ -62,6 +62,12 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-semibold text-sm mb-3">Connect</h4>
             <div className="flex flex-col gap-2">
+              <a
+                href="mailto:contact@askvishvex.com"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                contact@askvishvex.com
+              </a>
               {["Fiverr", "GitHub", "LinkedIn"].map((label) => (
                 <a
                   key={label}

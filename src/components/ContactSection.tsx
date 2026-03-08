@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Mail } from "lucide-react";
 
 const links = [
-  { label: "Fiverr", url: "#", icon: "🟢" },
-  { label: "GitHub", url: "#", icon: "⚡" },
-  { label: "LinkedIn", url: "#", icon: "🔗" },
+  { label: "contact@askvishvex.com", url: "mailto:contact@askvishvex.com", icon: <Mail size={20} />, isEmail: true },
+  { label: "Fiverr", url: "#", icon: <span className="text-xl">🟢</span> },
+  { label: "GitHub", url: "#", icon: <span className="text-xl">⚡</span> },
+  { label: "LinkedIn", url: "#", icon: <span className="text-xl">🔗</span> },
 ];
 
 const ContactSection = () => {
@@ -35,13 +36,13 @@ const ContactSection = () => {
             <a
               key={link.label}
               href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={link.isEmail ? undefined : "_blank"}
+              rel={link.isEmail ? undefined : "noopener noreferrer"}
               className="glow-card gradient-border px-8 py-4 flex items-center gap-3 group"
             >
-              <span className="text-xl">{link.icon}</span>
+              {link.icon}
               <span className="font-medium">{link.label}</span>
-              <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+              {!link.isEmail && <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />}
             </a>
           ))}
         </motion.div>
