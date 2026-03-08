@@ -6,7 +6,16 @@ const TURNSTILE_SITE_KEY = "0x4AAAAAACn5OiIEwMl8dmHN";
 const API_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbx4-Si3ifPt5DP0_sILD0NnoQR2dJdu-FD1RkNYtGsDUduNlaOogrElNJx_dvo48ic8/exec";
 
-const projectTypes = ["Website", "Web App", "AI Tool", "Automation"];
+const projectTypes = [
+  "AI Development & Prompt Engineering",
+  "Website Development",
+  "Web Application Development",
+  "n8n Workflow Automation",
+  "Automation Systems",
+  "API Integration",
+  "UI / UX Design",
+  "Website Deployment & Cloud Hosting",
+];
 const currencies = ["USD", "INR", "EUR", "GBP"];
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
