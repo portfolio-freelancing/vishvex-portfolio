@@ -235,17 +235,26 @@ const WorkRequestForm = () => {
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Budget Range *</label>
-              <select
-                name="budget"
-                required
-                className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
-              >
-                <option value="">Select budget</option>
-                {budgetRanges.map((b) => (
-                  <option key={b} value={b}>{b}</option>
-                ))}
-              </select>
+              <label className="text-sm font-medium mb-1.5 block">Budget Amount *</label>
+              <div className="flex gap-2">
+                <input
+                  name="budgetAmount"
+                  required
+                  type="number"
+                  min={1}
+                  className="flex-1 px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
+                  placeholder="e.g. 500"
+                />
+                <select
+                  name="currency"
+                  required
+                  className="w-24 px-3 py-2.5 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
+                >
+                  {currencies.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
 
