@@ -1,51 +1,64 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Mail } from "lucide-react";
+import { Mail, ArrowUpRight } from "lucide-react";
 
 const links = [
-  { label: "contact@askvishvex.com", url: "mailto:contact@askvishvex.com", icon: <Mail size={20} />, isEmail: true },
-  { label: "Fiverr", url: "#", icon: <span className="text-xl">🟢</span> },
-  { label: "GitHub", url: "#", icon: <span className="text-xl">⚡</span> },
-  { label: "LinkedIn", url: "#", icon: <span className="text-xl">🔗</span> },
+  { label: "contact@askvishvex.com", url: "mailto:contact@askvishvex.com", isEmail: true },
+  { label: "Fiverr", url: "#" },
+  { label: "GitHub", url: "#" },
+  { label: "LinkedIn", url: "#" },
 ];
 
 const ContactSection = () => {
   return (
     <section id="contact" className="section-padding">
       <div className="container-narrow">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <span className="text-xs uppercase tracking-widest text-primary font-medium">Get In Touch</span>
-          <h2 className="text-3xl md:text-4xl font-bold font-display mt-3">
-            Let's <span className="gradient-text">Connect</span>
-          </h2>
-        </motion.div>
+        <div className="section-divider mb-32" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4"
-        >
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.url}
-              target={link.isEmail ? undefined : "_blank"}
-              rel={link.isEmail ? undefined : "noopener noreferrer"}
-              className="glow-card gradient-border px-8 py-4 flex items-center gap-3 group"
-            >
-              {link.icon}
-              <span className="font-medium">{link.label}</span>
-              {!link.isEmail && <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />}
-            </a>
-          ))}
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="text-xs uppercase tracking-widest text-primary font-medium">Contact</span>
+            <h2 className="text-3xl md:text-5xl font-bold font-display mt-3 mb-4">
+              Let's talk
+            </h2>
+            <p className="text-muted-foreground mb-6 max-w-md">
+              Have a project in mind? Reach out and let's discuss how we can help.
+            </p>
+
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span className="w-2 h-2 rounded-full bg-neon animate-pulse" />
+              Response within 24 hours
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-3"
+          >
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.url}
+                target={link.isEmail ? undefined : "_blank"}
+                rel={link.isEmail ? undefined : "noopener noreferrer"}
+                className="group flex items-center justify-between p-4 rounded-xl border border-border bg-card hover:border-primary/30 transition-all duration-300"
+              >
+                <div className="flex items-center gap-3">
+                  {link.isEmail && <Mail size={18} className="text-primary" />}
+                  <span className="font-medium text-sm">{link.label}</span>
+                </div>
+                <ArrowUpRight size={16} className="text-muted-foreground group-hover:text-primary transition-colors" />
+              </a>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
