@@ -162,7 +162,7 @@ const WorkRequestForm = () => {
           <span className="text-xs uppercase tracking-widest text-primary font-medium">Work With Us</span>
           <h2 className="text-3xl md:text-4xl font-bold font-display mt-3">
             Start Your Project with{" "}
-            <span className="gradient-text">Lord Creation</span>
+            <span className="gradient-text">Vishvex</span>
           </h2>
         </motion.div>
 
