@@ -36,13 +36,13 @@ const ContactSection = () => {
             <a
               key={link.label}
               href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={link.isEmail ? undefined : "_blank"}
+              rel={link.isEmail ? undefined : "noopener noreferrer"}
               className="glow-card gradient-border px-8 py-4 flex items-center gap-3 group"
             >
-              <span className="text-xl">{link.icon}</span>
+              {link.icon}
               <span className="font-medium">{link.label}</span>
-              <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+              {!link.isEmail && <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />}
             </a>
           ))}
         </motion.div>
