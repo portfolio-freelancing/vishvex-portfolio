@@ -104,35 +104,22 @@ const WorkRequestForm = () => {
     };
 
     try {
-      // text/plain avoids CORS preflight. Google Apps Script's /exec endpoint
-      // returns a 302 redirect to script.googleusercontent.com which lacks
-      // Access-Control-Allow-Origin headers, causing a CORS error on the
-      // *response*. However, the POST body is delivered to Apps Script
-      // BEFORE the redirect, so the data reaches doPost() successfully.
-      // We treat both readable success responses AND CORS TypeErrors as success.
-      const res = await fetch(API_ENDPOINT, {
+      // Google Apps Script Web Apps often return cross-origin redirects/responses
+      // that are unreadable in browsers. Using `no-cors` ensures the POST is still
+      // dispatched to Apps Script; response body/status are intentionally opaque.
+      await fetch(API_ENDPOINT, {
         method: "POST",
+        mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(payload),
-        redirect: "follow",
+        keepalive: true,
       });
 
-      if (res.ok || res.type === "opaque" || res.status === 0) {
-        setSubmitted(true);
-      } else {
-        setError("Submission may have failed. Please try again.");
-      }
+      // If fetch resolved, request was dispatched.
+      setSubmitted(true);
     } catch (err: unknown) {
-      // The 302 redirect causes a CORS error on the response side,
-      // but the POST body was already delivered to Apps Script.
-      // TypeError = network/CORS error → treat as successful submission.
-      if (err instanceof TypeError) {
-        console.info("Form submitted (CORS redirect expected).");
-        setSubmitted(true);
-      } else {
-        console.error("Form submission error:", err);
-        setError("Something went wrong. Please try again or email us directly.");
-      }
+      console.error("Form submission error:", err);
+      setError("Submission failed to send. Please try again.");
     } finally {
       setSubmitting(false);
       if (window.turnstile && widgetIdRef.current) {
