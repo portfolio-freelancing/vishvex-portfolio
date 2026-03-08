@@ -1,24 +1,81 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle } from "lucide-react";
+
+const TURNSTILE_SITE_KEY = "0x4AAAAAACn5OiIEwMl8dmHN";
+const API_ENDPOINT =
+  "https://script.google.com/macros/s/AKfycbyBEAmwsBwSjhRst5549iby4qWnIlAJ_pAnq0biaZTuOdBEu-uTXb7O7pLw0S6LLkNMcQ/exec";
 
 const projectTypes = ["Website", "Discord Bot", "AI Tool", "Automation"];
 const budgetRanges = ["$100 - $500", "$500 - $1,000", "$1,000 - $5,000", "$5,000+"];
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const RATE_LIMIT_MS = 10_000; // 10 seconds between submissions
+const RATE_LIMIT_MS = 10_000;
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        el: string | HTMLElement,
+        opts: { sitekey: string; callback: (token: string) => void; "expired-callback"?: () => void; theme?: string }
+      ) => string;
+      reset: (widgetId: string) => void;
+    };
+  }
+}
 
 const WorkRequestForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | false>(false);
   const lastSubmitRef = useRef<number>(0);
+  const turnstileToken = useRef<string | null>(null);
+  const turnstileContainerRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
+
+  const onTurnstileVerify = useCallback((token: string) => {
+    turnstileToken.current = token;
+  }, []);
+
+  // Render Turnstile widget once the script loads
+  useEffect(() => {
+    if (!turnstileContainerRef.current) return;
+
+    const tryRender = () => {
+      if (window.turnstile && turnstileContainerRef.current && !widgetIdRef.current) {
+        widgetIdRef.current = window.turnstile.render(turnstileContainerRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          callback: onTurnstileVerify,
+          "expired-callback": () => {
+            turnstileToken.current = null;
+          },
+          theme: "dark",
+        });
+      }
+    };
+
+    tryRender();
+    // If script hasn't loaded yet, poll briefly
+    const interval = setInterval(() => {
+      if (window.turnstile) {
+        tryRender();
+        clearInterval(interval);
+      }
+    }, 500);
+    return () => clearInterval(interval);
+  }, [onTurnstileVerify]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(false);
 
-    // Client-side rate limiting
+    // CAPTCHA check
+    if (!turnstileToken.current) {
+      setError("Please complete the CAPTCHA verification before submitting.");
+      return;
+    }
+
+    // Rate limit
     const now = Date.now();
     if (now - lastSubmitRef.current < RATE_LIMIT_MS) {
       setError("Please wait a few seconds before submitting again.");
@@ -28,7 +85,6 @@ const WorkRequestForm = () => {
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form));
 
-    // Validate inputs
     const name = (data.name as string).trim();
     const email = (data.email as string).trim();
     const company = (data.company as string).trim();
@@ -58,30 +114,41 @@ const WorkRequestForm = () => {
       name,
       email,
       company,
-      projectType: (data.projectType as string),
-      budget: (data.budget as string),
+      projectType: data.projectType as string,
+      budget: data.budget as string,
       description,
       deadline: (data.deadline as string) || "",
     };
 
+    console.log("Form data:", payload);
+    console.log("Sending request to:", API_ENDPOINT);
+
     try {
-      const res = await fetch("https://script.google.com/macros/s/AKfycbyBEAmwsBwSjhRst5549iby4qWnIlAJ_pAnq0biaZTuOdBEu-uTXb7O7pLw0S6LLkNMcQ/exec", {
+      const res = await fetch(API_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "text/plain" },
         body: JSON.stringify(payload),
       });
+
       const result = await res.json();
-      console.log("Form submission response:", result);
+      console.log("Server response:", result);
+
       if (result.status === "success" || res.ok) {
         setSubmitted(true);
       } else {
+        console.error("Form submission failed:", result);
         setError(result.message || "Submission failed. Please try again.");
       }
     } catch (err) {
-      console.error("Form submission error:", err);
+      console.error("Form submission failed:", err);
       setError("Something went wrong. Please try again or email us directly.");
     } finally {
       setSubmitting(false);
+      // Reset turnstile for next attempt
+      if (window.turnstile && widgetIdRef.current) {
+        window.turnstile.reset(widgetIdRef.current);
+        turnstileToken.current = null;
+      }
     }
   };
 
@@ -97,7 +164,7 @@ const WorkRequestForm = () => {
             <CheckCircle size={48} className="text-neon mx-auto mb-4" />
             <h3 className="font-display text-2xl font-bold mb-2">Request Sent!</h3>
             <p className="text-muted-foreground">
-              Thank you for reaching out. We'll get back to you within 24 hours.
+              Submission successful. We will contact you shortly.
             </p>
           </motion.div>
         </div>
@@ -218,10 +285,13 @@ const WorkRequestForm = () => {
           </div>
 
           {error && (
-            <p className="text-sm text-destructive text-center">
-              {error}
-            </p>
+            <p className="text-sm text-destructive text-center">{error}</p>
           )}
+
+          {/* Cloudflare Turnstile CAPTCHA */}
+          <div className="flex justify-center">
+            <div ref={turnstileContainerRef} />
+          </div>
 
           <button
             type="submit"
