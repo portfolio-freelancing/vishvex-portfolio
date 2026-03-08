@@ -1,98 +1,65 @@
 import { motion } from "framer-motion";
-import { Cpu, Zap, Award, Users } from "lucide-react";
-
-const stats = [
-  { label: "Projects Delivered", value: "50+", icon: Award },
-  { label: "Happy Clients", value: "30+", icon: Users },
-  { label: "Technologies", value: "20+", icon: Cpu },
-];
+import { User, Cpu, Zap } from "lucide-react";
 
 const AboutSection = () => {
   return (
     <section id="about" className="section-padding" aria-labelledby="about-heading">
-      <div className="section-divider mb-32" />
       <div className="container-narrow">
-        <div className="grid lg:grid-cols-5 gap-16 items-start">
-          {/* Left: Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-3"
-          >
-            <span className="text-xs uppercase tracking-widest text-primary font-medium">About</span>
-            <h2 id="about-heading" className="text-3xl md:text-5xl font-bold font-display mt-3 mb-6 leading-tight">
-              A modern agency for the
-              <br />
-              <span className="gradient-text">AI-first era</span>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="grid md:grid-cols-2 gap-16 items-center"
+        >
+          <div>
+            <span className="text-xs uppercase tracking-widest text-primary font-medium">About Us</span>
+            <h2 id="about-heading" className="text-3xl md:text-4xl font-bold font-display mt-3 mb-6">
+              A Modern <span className="gradient-text">Development Agency</span>
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-8 max-w-xl">
-              We combine AI development with clean design to deliver powerful digital solutions. From intelligent automation to scalable web platforms — we build what matters.
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              Vishvex is a modern AI-powered development agency that builds websites, AI tools, workflow automations, and automation systems for startups, creators, and businesses. We combine cutting-edge AI development with clean design to deliver powerful digital solutions and scalable software products.
             </p>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
+                <Cpu size={18} className="text-primary" />
+                <span className="text-sm text-muted-foreground">AI Development</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Zap size={18} className="text-neon" />
+                <span className="text-sm text-muted-foreground">Automation</span>
+              </div>
+            </div>
+          </div>
 
-            <div className="flex gap-6 flex-wrap">
-              {stats.map((stat) => (
-                <div key={stat.label} className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <stat.icon size={18} className="text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-display font-bold text-lg">{stat.value}</p>
-                    <p className="text-xs text-muted-foreground">{stat.label}</p>
-                  </div>
-                </div>
+          <div className="gradient-border p-8">
+            <div className="flex items-center gap-4 mb-6">
+              <div
+                className="w-16 h-16 rounded-xl flex items-center justify-center"
+                style={{ background: "var(--gradient-primary)" }}
+              >
+                <User size={28} className="text-primary-foreground" />
+              </div>
+              <div>
+                <h3 className="font-display font-semibold text-lg">Vishnu Vardhan Nayak</h3>
+                <p className="text-sm text-muted-foreground">Founder, Vishvex</p>
+              </div>
+            </div>
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+              AI Developer and Prompt Engineer with a passion for building intelligent digital solutions. Specializing in creating AI-powered tools, modern websites, and automation systems that help businesses scale.
+            </p>
+            <div className="flex gap-2 flex-wrap">
+              {["AI Developer", "Prompt Engineer", "Full Stack"].map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs px-3 py-1 rounded-full border border-border text-muted-foreground"
+                >
+                  {tag}
+                </span>
               ))}
             </div>
-          </motion.div>
-
-          {/* Right: Founder card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="lg:col-span-2"
-          >
-            <div className="rounded-xl border border-border bg-card p-6 relative overflow-hidden">
-              {/* Subtle accent line */}
-              <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "var(--gradient-primary)" }} />
-
-              <div className="flex items-center gap-4 mb-5">
-                <div
-                  className="w-14 h-14 rounded-full flex items-center justify-center font-display font-bold text-lg text-primary-foreground"
-                  style={{ background: "var(--gradient-primary)" }}
-                >
-                  V
-                </div>
-                <div>
-                  <h3 className="font-display font-semibold">Vishnu Vardhan Nayak</h3>
-                  <p className="text-sm text-muted-foreground">Founder · AI Developer</p>
-                </div>
-              </div>
-
-              <p className="text-sm text-muted-foreground leading-relaxed mb-5">
-                Specializing in AI automation & scalable web systems. Building intelligent solutions that help businesses grow.
-              </p>
-
-              <div className="flex gap-2 flex-wrap">
-                {["AI Development", "Prompt Engineering", "Full Stack", "Automation"].map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs px-2.5 py-1 rounded-md bg-muted text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-2 mt-5 pt-5 border-t border-border">
-                <Zap size={14} className="text-neon" />
-                <span className="text-xs text-muted-foreground">Available for new projects</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

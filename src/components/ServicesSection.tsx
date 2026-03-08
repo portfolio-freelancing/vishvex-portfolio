@@ -1,62 +1,46 @@
 import { motion } from "framer-motion";
-import { Globe, Brain, Code, Workflow, Plug, Cog, Palette, Rocket } from "lucide-react";
+import { Globe, Brain, Palette, Rocket, Code, Workflow, Plug, Cog } from "lucide-react";
 
 const services = [
   {
     icon: Brain,
-    title: "AI Development",
-    description: "Intelligent AI solutions, prompt engineering, and smart automation systems.",
-    accent: "260 80% 62%",
-    span: "lg:col-span-2",
-  },
-  {
-    icon: Workflow,
-    title: "n8n Automation",
-    description: "Powerful workflow automation connecting APIs, AI tools, and business apps.",
-    accent: "170 100% 50%",
-    span: "",
+    title: "AI Development & Prompt Engineering",
+    description: "We design intelligent AI solutions and prompt engineering systems that power smart applications, automation workflows, and scalable digital products.",
   },
   {
     icon: Globe,
-    title: "Web Development",
-    description: "Fast, modern, SEO-optimized websites built for conversion.",
-    accent: "215 70% 55%",
-    span: "",
+    title: "Website Development",
+    description: "We build fast, modern, and responsive websites optimized for performance, SEO, and conversion-focused user experiences.",
   },
   {
     icon: Code,
-    title: "Web Applications",
-    description: "Custom SaaS platforms designed for scale and performance.",
-    accent: "280 100% 70%",
-    span: "lg:col-span-2",
+    title: "Web Application Development",
+    description: "Custom web applications and SaaS platforms designed for scalability, security, and high-performance digital experiences.",
+  },
+  {
+    icon: Workflow,
+    title: "n8n Workflow Automation",
+    description: "We build powerful automation workflows using n8n to connect APIs, AI tools, databases, and business applications. Our automation systems reduce manual work, streamline operations, and help businesses scale faster.",
   },
   {
     icon: Cog,
-    title: "Automation",
-    description: "Streamline operations with smart integrations.",
-    accent: "200 80% 55%",
-    span: "",
+    title: "Automation Systems",
+    description: "Automation solutions that streamline workflows, reduce manual tasks, and improve productivity through smart integrations and digital systems.",
   },
   {
     icon: Plug,
     title: "API Integration",
-    description: "Connect platforms and create powerful ecosystems.",
-    accent: "320 80% 60%",
-    span: "",
+    description: "Seamless API integrations connecting third-party platforms, payment systems, and automation tools to create powerful digital ecosystems.",
   },
   {
     icon: Palette,
-    title: "UI/UX Design",
-    description: "Clean interfaces focused on usability and engagement.",
-    accent: "260 80% 62%",
-    span: "",
+    title: "UI / UX Design",
+    description: "Clean and modern user interface design focused on usability, engagement, and seamless digital experiences.",
   },
   {
     icon: Rocket,
-    title: "Deployment",
-    description: "Cloud hosting, domain setup, and performance optimization.",
-    accent: "170 100% 50%",
-    span: "",
+    title: "Website Deployment & Cloud Hosting",
+    description: "Professional website deployment with domain setup, cloud hosting configuration, performance optimization, and secure infrastructure.",
   },
 ];
 
@@ -65,52 +49,36 @@ const ServicesSection = () => {
     <section id="services" className="section-padding" aria-labelledby="services-heading">
       <div className="container-narrow">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-16"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <span className="text-xs uppercase tracking-widest text-primary font-medium">Services</span>
-          <h2 id="services-heading" className="text-3xl md:text-5xl font-bold font-display mt-3 max-w-xl">
-            What we build
+          <span className="text-xs uppercase tracking-widest text-primary font-medium">What We Do</span>
+          <h2 id="services-heading" className="text-3xl md:text-4xl font-bold font-display mt-3">
+            AI & Software <span className="gradient-text">Development Services</span>
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {services.map((service, i) => (
             <motion.article
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className={`group relative overflow-hidden rounded-xl border border-border bg-card p-6 transition-all duration-500 hover:border-primary/30 hover:shadow-lg ${service.span}`}
-              style={{
-                ["--service-accent" as string]: service.accent,
-              }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="glow-card gradient-border p-6 group cursor-default"
             >
-              {/* Hover glow */}
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: `radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(${service.accent} / 0.06), transparent 60%)`,
-                }}
-              />
-
-              <div className="relative z-10">
-                <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
-                  style={{
-                    background: `hsl(${service.accent} / 0.1)`,
-                    boxShadow: `0 0 0 hsl(${service.accent} / 0)`,
-                  }}
-                >
-                  <service.icon size={20} style={{ color: `hsl(${service.accent})` }} />
-                </div>
-                <h3 className="font-display font-semibold text-base mb-1.5">{service.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+                className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                style={{ background: "var(--gradient-primary)" }}
+              >
+                <service.icon size={22} className="text-primary-foreground" />
               </div>
+              <h3 className="font-display font-semibold text-lg mb-2">{service.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
             </motion.article>
           ))}
         </div>

@@ -12,9 +12,6 @@ import Footer from "@/components/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Noise texture overlay */}
-      <div className="noise-overlay" />
-      
       <Navbar />
       <main>
         <HeroSection />
