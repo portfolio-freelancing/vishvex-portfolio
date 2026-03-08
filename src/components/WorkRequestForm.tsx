@@ -118,10 +118,13 @@ const WorkRequestForm = () => {
       budget: data.budget as string,
       description,
       deadline: (data.deadline as string) || "",
+      cf_turnstile_response: turnstileToken.current,
     };
 
-    console.log("Form data:", payload);
-    console.log("Sending request to:", API_ENDPOINT);
+    if (import.meta.env.DEV) {
+      console.log("[DEV] Form data:", payload);
+      console.log("[DEV] Sending request to:", API_ENDPOINT);
+    }
 
     try {
       const res = await fetch(API_ENDPOINT, {
@@ -131,16 +134,16 @@ const WorkRequestForm = () => {
       });
 
       const result = await res.json();
-      console.log("Server response:", result);
+      if (import.meta.env.DEV) console.log("[DEV] Server response:", result);
 
       if (result.status === "success" || res.ok) {
         setSubmitted(true);
       } else {
-        console.error("Form submission failed:", result);
+        if (import.meta.env.DEV) console.error("[DEV] Form submission failed:", result);
         setError(result.message || "Submission failed. Please try again.");
       }
     } catch (err) {
-      console.error("Form submission failed:", err);
+      if (import.meta.env.DEV) console.error("[DEV] Form submission failed:", err);
       setError("Something went wrong. Please try again or email us directly.");
     } finally {
       setSubmitting(false);
