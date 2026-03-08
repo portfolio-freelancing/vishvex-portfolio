@@ -7,7 +7,7 @@ const API_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbx4-Si3ifPt5DP0_sILD0NnoQR2dJdu-FD1RkNYtGsDUduNlaOogrElNJx_dvo48ic8/exec";
 
 const projectTypes = ["Website", "Web App", "AI Tool", "Automation"];
-const budgetRanges = ["$100 - $500", "$500 - $1,000", "$1,000 - $5,000", "$5,000+"];
+const currencies = ["USD", "INR", "EUR", "GBP"];
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RATE_LIMIT_MS = 10_000;
@@ -94,10 +94,19 @@ const WorkRequestForm = () => {
     setSubmitting(true);
     lastSubmitRef.current = now;
 
+    const budgetAmount = (data.budgetAmount as string).trim();
+    const currency = (data.currency as string);
+
+    if (!budgetAmount || isNaN(Number(budgetAmount)) || Number(budgetAmount) <= 0) {
+      setError("Please enter a valid budget amount.");
+      setSubmitting(false);
+      return;
+    }
+
     const payload = {
       name, email, company,
       projectType: data.projectType as string,
-      budget: data.budget as string,
+      budget: `${budgetAmount} ${currency}`,
       description,
       deadline: (data.deadline as string) || "",
       turnstileToken: turnstileToken.current,
@@ -226,17 +235,26 @@ const WorkRequestForm = () => {
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Budget Range *</label>
-              <select
-                name="budget"
-                required
-                className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
-              >
-                <option value="">Select budget</option>
-                {budgetRanges.map((b) => (
-                  <option key={b} value={b}>{b}</option>
-                ))}
-              </select>
+              <label className="text-sm font-medium mb-1.5 block">Budget Amount *</label>
+              <div className="flex gap-2">
+                <input
+                  name="budgetAmount"
+                  required
+                  type="number"
+                  min={1}
+                  className="flex-1 px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
+                  placeholder="e.g. 500"
+                />
+                <select
+                  name="currency"
+                  required
+                  className="w-24 px-3 py-2.5 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
+                >
+                  {currencies.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
 
