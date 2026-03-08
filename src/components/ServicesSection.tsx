@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Globe, Brain, Palette, Rocket, Code, Workflow, Plug } from "lucide-react";
+import { Globe, Brain, Palette, Rocket, Code, Workflow, Plug, Cog } from "lucide-react";
 
 const services = [
   {
@@ -23,7 +23,7 @@ const services = [
     description: "We build powerful automation workflows using n8n to connect APIs, AI tools, databases, and business applications. Our automation systems reduce manual work, streamline operations, and help businesses scale faster.",
   },
   {
-    icon: Workflow,
+    icon: Cog,
     title: "Automation Systems",
     description: "Automation solutions that streamline workflows, reduce manual tasks, and improve productivity through smart integrations and digital systems.",
   },
