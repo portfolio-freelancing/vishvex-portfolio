@@ -4,7 +4,7 @@ import { Send, CheckCircle } from "lucide-react";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACn5OiIEwMl8dmHN";
 const API_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbxKEKnZ0FmRj5eBKHlduQfb7JQkvQUVrvRjCxtEWEE4rfwWe6uH3KG8wUt8ZUgVlS8/exec";
+  "https://script.google.com/macros/s/AKfycbx4-Si3ifPt5DP0_sILD0NnoQR2dJdu-FD1RkNYtGsDUduNlaOogrElNJx_dvo48ic8/exec";
 
 const projectTypes = ["Website", "Discord Bot", "AI Tool", "Automation"];
 const budgetRanges = ["$100 - $500", "$500 - $1,000", "$1,000 - $5,000", "$5,000+"];
