@@ -51,7 +51,7 @@ const HeroSection = () => {
         >
           <span className="gradient-text">Vishvex</span> – AI Development
           <br />
-          & <span className="gradient-text-accent">Digital Solutions Agency</span>
+          & <span className="gradient-text-accent">Automation Agency</span>
         </motion.h1>
 
         <motion.p
