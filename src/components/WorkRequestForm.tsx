@@ -54,15 +54,31 @@ const WorkRequestForm = () => {
     setSubmitting(true);
     lastSubmitRef.current = now;
 
-    const formData = new FormData(form);
+    const payload = {
+      name,
+      email,
+      company,
+      projectType: (data.projectType as string),
+      budget: (data.budget as string),
+      description,
+      deadline: (data.deadline as string) || "",
+    };
+
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbyBEAmwsBwSjhRst5549iby4qWnIlAJ_pAnq0biaZTuOdBEu-uTXb7O7pLw0S6LLkNMcQ/exec", {
+      const res = await fetch("https://script.google.com/macros/s/AKfycbyBEAmwsBwSjhRst5549iby4qWnIlAJ_pAnq0biaZTuOdBEu-uTXb7O7pLw0S6LLkNMcQ/exec", {
         method: "POST",
-        mode: "no-cors",
-        body: formData,
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify(payload),
       });
-      setSubmitted(true);
-    } catch {
+      const result = await res.json();
+      console.log("Form submission response:", result);
+      if (result.status === "success" || res.ok) {
+        setSubmitted(true);
+      } else {
+        setError(result.message || "Submission failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Form submission error:", err);
       setError("Something went wrong. Please try again or email us directly.");
     } finally {
       setSubmitting(false);
