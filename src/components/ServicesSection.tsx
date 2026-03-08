@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Globe, Bot, Brain, Palette, Rocket, Code, Workflow, Plug } from "lucide-react";
+import { Globe, Brain, Palette, Rocket, Code, Workflow, Plug } from "lucide-react";
 
 const services = [
   {
@@ -18,9 +18,9 @@ const services = [
     description: "Custom web applications and SaaS platforms designed for scalability, security, and high-performance digital experiences.",
   },
   {
-    icon: Bot,
-    title: "Discord Bot Development",
-    description: "Custom Discord bots for gaming communities, startups, and businesses with moderation tools, automation features, payment integrations, and AI-powered functionality.",
+    icon: Workflow,
+    title: "n8n Workflow Automation",
+    description: "We build powerful automation workflows using n8n to connect APIs, AI tools, databases, and business applications. Our automation systems reduce manual work, streamline operations, and help businesses scale faster.",
   },
   {
     icon: Workflow,

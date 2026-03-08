@@ -60,7 +60,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
         >
-          Vishvex is an AI-powered software development agency specializing in modern website development, Discord bot development, AI automation systems, prompt engineering, and scalable digital platforms for businesses and startups.
+          Vishvex is an AI-powered software development agency specializing in modern website development, n8n workflow automation, AI automation systems, prompt engineering, and scalable digital platforms for businesses and startups.
         </motion.p>
 
         <motion.div

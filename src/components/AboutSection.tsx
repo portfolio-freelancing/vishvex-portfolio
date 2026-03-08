@@ -18,7 +18,7 @@ const AboutSection = () => {
               A Modern <span className="gradient-text">Development Agency</span>
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Vishvex is a modern AI-powered development agency that builds websites, AI tools, Discord bots, and automation systems for startups, creators, and online communities. We combine cutting-edge AI development with clean design to deliver powerful digital solutions and scalable software products.
+              Vishvex is a modern AI-powered development agency that builds websites, AI tools, workflow automations, and automation systems for startups, creators, and businesses. We combine cutting-edge AI development with clean design to deliver powerful digital solutions and scalable software products.
             </p>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3">
