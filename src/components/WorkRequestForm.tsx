@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle } from "lucide-react";
+import { Send } from "lucide-react";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACn5OiIEwMl8dmHN";
 const API_ENDPOINT =
@@ -8,9 +8,6 @@ const API_ENDPOINT =
 
 const projectTypes = ["Website", "Discord Bot", "AI Tool", "Automation"];
 const budgetRanges = ["$100 - $500", "$500 - $1,000", "$1,000 - $5,000", "$5,000+"];
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const RATE_LIMIT_MS = 10_000;
 
 declare global {
   interface Window {
@@ -25,19 +22,14 @@ declare global {
 }
 
 const WorkRequestForm = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | false>(false);
-  const lastSubmitRef = useRef<number>(0);
-  const turnstileToken = useRef<string | null>(null);
   const turnstileContainerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
 
   const onTurnstileVerify = useCallback((token: string) => {
-    turnstileToken.current = token;
+    const input = document.querySelector<HTMLInputElement>('input[name="turnstileToken"]');
+    if (input) input.value = token;
   }, []);
 
-  // Render Turnstile widget once the script loads
   useEffect(() => {
     if (!turnstileContainerRef.current) return;
 
@@ -47,7 +39,8 @@ const WorkRequestForm = () => {
           sitekey: TURNSTILE_SITE_KEY,
           callback: onTurnstileVerify,
           "expired-callback": () => {
-            turnstileToken.current = null;
+            const input = document.querySelector<HTMLInputElement>('input[name="turnstileToken"]');
+            if (input) input.value = "";
           },
           theme: "dark",
         });
@@ -55,7 +48,6 @@ const WorkRequestForm = () => {
     };
 
     tryRender();
-    // If script hasn't loaded yet, poll briefly
     const interval = setInterval(() => {
       if (window.turnstile) {
         tryRender();
@@ -64,116 +56,6 @@ const WorkRequestForm = () => {
     }, 500);
     return () => clearInterval(interval);
   }, [onTurnstileVerify]);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(false);
-
-    // CAPTCHA check
-    if (!turnstileToken.current) {
-      setError("Please complete the CAPTCHA verification before submitting.");
-      return;
-    }
-
-    // Rate limit
-    const now = Date.now();
-    if (now - lastSubmitRef.current < RATE_LIMIT_MS) {
-      setError("Please wait a few seconds before submitting again.");
-      return;
-    }
-
-    const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form));
-
-    const name = (data.name as string).trim();
-    const email = (data.email as string).trim();
-    const company = (data.company as string).trim();
-    const description = (data.description as string).trim();
-
-    if (!name || name.length > 100) {
-      setError("Name is required and must be under 100 characters.");
-      return;
-    }
-    if (!email || !EMAIL_REGEX.test(email) || email.length > 255) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-    if (company.length > 100) {
-      setError("Company name must be under 100 characters.");
-      return;
-    }
-    if (!description || description.length > 2000) {
-      setError("Description is required and must be under 2000 characters.");
-      return;
-    }
-
-    setSubmitting(true);
-    lastSubmitRef.current = now;
-
-    const payload = {
-      name,
-      email,
-      company,
-      projectType: data.projectType as string,
-      budget: data.budget as string,
-      description,
-      deadline: (data.deadline as string) || "",
-      turnstileToken: turnstileToken.current,
-    };
-
-    if (import.meta.env.DEV) {
-      console.log("[DEV] Form data:", payload);
-      console.log("[DEV] Sending request to:", API_ENDPOINT);
-    }
-
-    try {
-      const res = await fetch(API_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain" },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await res.json();
-      if (import.meta.env.DEV) console.log("[DEV] Server response:", result);
-
-      if (result.status === "success" || res.ok) {
-        setSubmitted(true);
-      } else {
-        if (import.meta.env.DEV) console.error("[DEV] Form submission failed:", result);
-        setError(result.message || "Submission failed. Please try again.");
-      }
-    } catch (err) {
-      if (import.meta.env.DEV) console.error("[DEV] Form submission failed:", err);
-      setError("Something went wrong. Please try again or email us directly.");
-    } finally {
-      setSubmitting(false);
-      // Reset turnstile for next attempt
-      if (window.turnstile && widgetIdRef.current) {
-        window.turnstile.reset(widgetIdRef.current);
-        turnstileToken.current = null;
-      }
-    }
-  };
-
-  if (submitted) {
-    return (
-      <section id="work-request" className="section-padding">
-        <div className="container-narrow max-w-2xl">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="gradient-border p-12 text-center"
-          >
-            <CheckCircle size={48} className="text-neon mx-auto mb-4" />
-            <h3 className="font-display text-2xl font-bold mb-2">Request Sent!</h3>
-            <p className="text-muted-foreground">
-              Submission successful. We will contact you shortly.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="work-request" className="section-padding">
@@ -197,8 +79,9 @@ const WorkRequestForm = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
+          action={API_ENDPOINT}
+          method="POST"
           id="projectForm"
-          onSubmit={handleSubmit}
           className="gradient-border p-8 space-y-5"
         >
           <div className="grid sm:grid-cols-2 gap-5">
@@ -287,9 +170,8 @@ const WorkRequestForm = () => {
             />
           </div>
 
-          {error && (
-            <p className="text-sm text-destructive text-center">{error}</p>
-          )}
+          {/* Hidden Turnstile token field */}
+          <input type="hidden" name="turnstileToken" />
 
           {/* Cloudflare Turnstile CAPTCHA */}
           <div className="flex justify-center">
@@ -298,12 +180,11 @@ const WorkRequestForm = () => {
 
           <button
             type="submit"
-            disabled={submitting}
-            className="w-full py-3 rounded-lg font-medium text-primary-foreground flex items-center justify-center gap-2 transition-all duration-300 hover:opacity-90 hover:scale-[1.01] disabled:opacity-60"
+            className="w-full py-3 rounded-lg font-medium text-primary-foreground flex items-center justify-center gap-2 transition-all duration-300 hover:opacity-90 hover:scale-[1.01]"
             style={{ background: "var(--gradient-primary)" }}
           >
             <Send size={16} />
-            {submitting ? "Sending..." : "Send Project Request"}
+            Send Project Request
           </button>
         </motion.form>
       </div>
