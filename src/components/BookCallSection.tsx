@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import { Clock, MessageSquare, Lightbulb } from "lucide-react";
+import { Clock, MessageSquare } from "lucide-react";
 
 const benefits = [
   { icon: Clock, label: "15–30 min consultation" },
   { icon: MessageSquare, label: "Project discussion" },
-  { icon: Lightbulb, label: "Free guidance on your idea" },
 ];
 
 const BookCallSection = () => {
