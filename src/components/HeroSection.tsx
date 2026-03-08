@@ -49,8 +49,9 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.15 }}
           className="text-4xl sm:text-5xl md:text-7xl font-bold font-display leading-tight mb-6"
         >
-          <span className="gradient-text">AI Development</span> &{" "}
-          <span className="gradient-text-accent">Automation Solutions</span>
+          <span className="gradient-text">Vishvex</span> – AI Development
+          <br />
+          & <span className="gradient-text-accent">Digital Solutions Agency</span>
         </motion.h1>
 
         <motion.p
