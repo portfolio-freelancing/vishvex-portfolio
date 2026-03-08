@@ -94,10 +94,19 @@ const WorkRequestForm = () => {
     setSubmitting(true);
     lastSubmitRef.current = now;
 
+    const budgetAmount = (data.budgetAmount as string).trim();
+    const currency = (data.currency as string);
+
+    if (!budgetAmount || isNaN(Number(budgetAmount)) || Number(budgetAmount) <= 0) {
+      setError("Please enter a valid budget amount.");
+      setSubmitting(false);
+      return;
+    }
+
     const payload = {
       name, email, company,
       projectType: data.projectType as string,
-      budget: data.budget as string,
+      budget: `${budgetAmount} ${currency}`,
       description,
       deadline: (data.deadline as string) || "",
       turnstileToken: turnstileToken.current,
