@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle } from "lucide-react";
+import { Send, CheckCircle, Clock, Shield } from "lucide-react";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACn5OiIEwMl8dmHN";
 const API_ENDPOINT =
@@ -20,6 +20,9 @@ const currencies = ["USD", "INR", "EUR", "GBP"];
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RATE_LIMIT_MS = 10_000;
+
+const inputClass =
+  "w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary/40 focus:ring-1 focus:ring-primary/20 transition-all text-sm";
 
 declare global {
   interface Window {
@@ -122,9 +125,6 @@ const WorkRequestForm = () => {
     };
 
     try {
-      // Google Apps Script Web Apps often return cross-origin redirects/responses
-      // that are unreadable in browsers. Using `no-cors` ensures the POST is still
-      // dispatched to Apps Script; response body/status are intentionally opaque.
       await fetch(API_ENDPOINT, {
         method: "POST",
         mode: "no-cors",
@@ -132,8 +132,6 @@ const WorkRequestForm = () => {
         body: JSON.stringify(payload),
         keepalive: true,
       });
-
-      // If fetch resolved, request was dispatched.
       setSubmitted(true);
     } catch (err: unknown) {
       if (import.meta.env.DEV) console.error("Form submission error:", err);
@@ -154,12 +152,12 @@ const WorkRequestForm = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="gradient-border p-12 text-center"
+            className="rounded-xl border border-border bg-card p-12 text-center"
           >
-            <CheckCircle size={48} className="text-neon mx-auto mb-4" />
-            <h3 className="font-display text-2xl font-bold mb-2">Request Sent!</h3>
-            <p className="text-muted-foreground">
-              Submission successful. We will contact you shortly.
+            <CheckCircle size={40} className="text-neon mx-auto mb-4" />
+            <h3 className="font-display text-2xl font-bold mb-2">Request Sent</h3>
+            <p className="text-sm text-muted-foreground">
+              We'll get back to you within 24 hours.
             </p>
           </motion.div>
         </div>
@@ -170,73 +168,60 @@ const WorkRequestForm = () => {
   return (
     <section id="work-request" className="section-padding">
       <div className="container-narrow max-w-2xl">
+        <div className="section-divider mb-32" />
+
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.5 }}
+          className="mb-10"
         >
-          <span className="text-xs uppercase tracking-widest text-primary font-medium">Work With Us</span>
-          <h2 className="text-3xl md:text-4xl font-bold font-display mt-3">
-            Start Your Project with{" "}
-            <span className="gradient-text">Vishvex</span>
+          <span className="text-xs uppercase tracking-widest text-primary font-medium">Start</span>
+          <h2 className="text-3xl md:text-5xl font-bold font-display mt-3">
+            Start your project
           </h2>
+          <div className="flex items-center gap-4 mt-4">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Clock size={12} className="text-primary" />
+              Response within 24h
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Shield size={12} className="text-primary" />
+              Your data is secure
+            </div>
+          </div>
         </motion.div>
 
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           id="projectForm"
           onSubmit={handleSubmit}
-          className="gradient-border p-8 space-y-5"
+          className="rounded-xl border border-border bg-card p-6 sm:p-8 space-y-5"
         >
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Full Name *</label>
-              <input
-                name="name"
-                required
-                type="text"
-                maxLength={100}
-                className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
-                placeholder="Your name"
-              />
+              <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Full Name *</label>
+              <input name="name" required type="text" maxLength={100} className={inputClass} placeholder="Your name" />
             </div>
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Email *</label>
-              <input
-                name="email"
-                required
-                type="email"
-                maxLength={255}
-                className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
-                placeholder="you@email.com"
-              />
+              <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Email *</label>
+              <input name="email" required type="email" maxLength={255} className={inputClass} placeholder="you@email.com" />
             </div>
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Company <span className="text-muted-foreground">(optional)</span></label>
-            <input
-              name="company"
-              type="text"
-              maxLength={100}
-              className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
-              placeholder="Company name"
-            />
+            <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Company <span className="text-muted-foreground/50">(optional)</span></label>
+            <input name="company" type="text" maxLength={100} className={inputClass} placeholder="Company name" />
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Project Type *</label>
-              <select
-                name="projectType"
-                required
-                className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
-              >
+              <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Project Type *</label>
+              <select name="projectType" required className={inputClass}>
                 <option value="">Select type</option>
                 {projectTypes.map((t) => (
                   <option key={t} value={t}>{t}</option>
@@ -244,21 +229,10 @@ const WorkRequestForm = () => {
               </select>
             </div>
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Budget Amount *</label>
+              <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Budget *</label>
               <div className="flex gap-2">
-                <input
-                  name="budgetAmount"
-                  required
-                  type="number"
-                  min={1}
-                  className="flex-1 px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
-                  placeholder="e.g. 500"
-                />
-                <select
-                  name="currency"
-                  required
-                  className="w-24 px-3 py-2.5 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
-                >
+                <input name="budgetAmount" required type="number" min={1} className={`${inputClass} flex-1`} placeholder="500" />
+                <select name="currency" required className={`${inputClass} w-20`}>
                   {currencies.map((c) => (
                     <option key={c} value={c}>{c}</option>
                   ))}
@@ -268,31 +242,19 @@ const WorkRequestForm = () => {
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Project Description *</label>
-            <textarea
-              name="description"
-              required
-              rows={4}
-              maxLength={2000}
-              className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm resize-none"
-              placeholder="Tell us about your project..."
-            />
+            <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Description *</label>
+            <textarea name="description" required rows={4} maxLength={2000} className={`${inputClass} resize-none`} placeholder="Tell us about your project..." />
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Deadline <span className="text-muted-foreground">(optional)</span></label>
-            <input
-              name="deadline"
-              type="date"
-              className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
-            />
+            <label className="text-xs font-medium mb-1.5 block text-muted-foreground">Deadline <span className="text-muted-foreground/50">(optional)</span></label>
+            <input name="deadline" type="date" className={inputClass} />
           </div>
 
           {error && (
             <p className="text-sm text-destructive text-center">{error}</p>
           )}
 
-          {/* Cloudflare Turnstile CAPTCHA */}
           <div className="flex justify-center">
             <div ref={turnstileContainerRef} />
           </div>
@@ -300,11 +262,11 @@ const WorkRequestForm = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-3 rounded-lg font-medium text-primary-foreground flex items-center justify-center gap-2 transition-all duration-300 hover:opacity-90 hover:scale-[1.01] disabled:opacity-60"
+            className="w-full py-3 rounded-lg font-medium text-primary-foreground flex items-center justify-center gap-2 transition-all duration-300 hover:opacity-90 disabled:opacity-60 text-sm"
             style={{ background: "var(--gradient-primary)" }}
           >
-            <Send size={16} />
-            {submitting ? "Sending..." : "Send Project Request"}
+            <Send size={14} />
+            {submitting ? "Sending..." : "Send Request"}
           </button>
         </motion.form>
       </div>
