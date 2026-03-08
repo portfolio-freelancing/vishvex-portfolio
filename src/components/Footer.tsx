@@ -8,7 +8,7 @@ const quickLinks = [
 const footerServices = [
   "AI Development",
   "Website Development",
-  "Discord Bot Development",
+  "n8n Workflow Automation",
   "Automation Systems",
   "Prompt Engineering",
   "Web Application Development",
