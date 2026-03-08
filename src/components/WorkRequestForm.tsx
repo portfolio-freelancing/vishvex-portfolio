@@ -106,12 +106,14 @@ const WorkRequestForm = () => {
     try {
       const res = await fetch(API_ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "text/plain" },
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(payload),
+        redirect: "follow",
       });
 
-      const result = await res.json();
-      if (result.status === "success" || res.ok) {
+      const text = await res.text();
+      const result = JSON.parse(text);
+      if (result.status === "success") {
         setSubmitted(true);
       } else {
         setError(result.message || "Submission failed. Please try again.");
