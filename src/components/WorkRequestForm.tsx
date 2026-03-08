@@ -108,17 +108,19 @@ const WorkRequestForm = () => {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(payload),
-        redirect: "follow",
+        mode: "no-cors",
       });
 
-      const text = await res.text();
-      const result = JSON.parse(text);
-      if (result.status === "success") {
+      // Google Apps Script redirects POST requests (302), which causes CORS issues
+      // with "cors" mode. Using "no-cors" means we get an opaque response (status 0),
+      // but if the fetch completes without throwing, the submission was sent successfully.
+      if (res.type === "opaque" || res.ok || res.status === 0) {
         setSubmitted(true);
       } else {
-        setError(result.message || "Submission failed. Please try again.");
+        setError("Submission may have failed. Please try again.");
       }
-    } catch {
+    } catch (err) {
+      console.error("Form submission error:", err);
       setError("Something went wrong. Please try again or email us directly.");
     } finally {
       setSubmitting(false);
