@@ -1,20 +1,59 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle } from "lucide-react";
 
 const projectTypes = ["Website", "Discord Bot", "AI Tool", "Automation"];
 const budgetRanges = ["$100 - $500", "$500 - $1,000", "$1,000 - $5,000", "$5,000+"];
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RATE_LIMIT_MS = 10_000; // 10 seconds between submissions
+
 const WorkRequestForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | false>(false);
+  const lastSubmitRef = useRef<number>(0);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitting(true);
     setError(false);
+
+    // Client-side rate limiting
+    const now = Date.now();
+    if (now - lastSubmitRef.current < RATE_LIMIT_MS) {
+      setError("Please wait a few seconds before submitting again.");
+      return;
+    }
+
     const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+
+    // Validate inputs
+    const name = (data.name as string).trim();
+    const email = (data.email as string).trim();
+    const company = (data.company as string).trim();
+    const description = (data.description as string).trim();
+
+    if (!name || name.length > 100) {
+      setError("Name is required and must be under 100 characters.");
+      return;
+    }
+    if (!email || !EMAIL_REGEX.test(email) || email.length > 255) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (company.length > 100) {
+      setError("Company name must be under 100 characters.");
+      return;
+    }
+    if (!description || description.length > 2000) {
+      setError("Description is required and must be under 2000 characters.");
+      return;
+    }
+
+    setSubmitting(true);
+    lastSubmitRef.current = now;
+
     const formData = new FormData(form);
     try {
       await fetch("https://script.google.com/macros/s/AKfycbyBEAmwsBwSjhRst5549iby4qWnIlAJ_pAnq0biaZTuOdBEu-uTXb7O7pLw0S6LLkNMcQ/exec", {
@@ -24,7 +63,7 @@ const WorkRequestForm = () => {
       });
       setSubmitted(true);
     } catch {
-      setError(true);
+      setError("Something went wrong. Please try again or email us directly.");
     } finally {
       setSubmitting(false);
     }
@@ -83,6 +122,7 @@ const WorkRequestForm = () => {
                 name="name"
                 required
                 type="text"
+                maxLength={100}
                 className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
                 placeholder="Your name"
               />
@@ -93,6 +133,7 @@ const WorkRequestForm = () => {
                 name="email"
                 required
                 type="email"
+                maxLength={255}
                 className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
                 placeholder="you@email.com"
               />
@@ -104,6 +145,7 @@ const WorkRequestForm = () => {
             <input
               name="company"
               type="text"
+              maxLength={100}
               className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
               placeholder="Company name"
             />
@@ -144,6 +186,7 @@ const WorkRequestForm = () => {
               name="description"
               required
               rows={4}
+              maxLength={2000}
               className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm resize-none"
               placeholder="Tell us about your project..."
             />
@@ -160,7 +203,7 @@ const WorkRequestForm = () => {
 
           {error && (
             <p className="text-sm text-destructive text-center">
-              Something went wrong. Please try again or email us directly.
+              {error}
             </p>
           )}
 
