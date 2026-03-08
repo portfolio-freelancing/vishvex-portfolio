@@ -118,7 +118,7 @@ const WorkRequestForm = () => {
       // If fetch resolved, request was dispatched.
       setSubmitted(true);
     } catch (err: unknown) {
-      console.error("Form submission error:", err);
+      if (import.meta.env.DEV) console.error("Form submission error:", err);
       setError("Submission failed to send. Please try again.");
     } finally {
       setSubmitting(false);
