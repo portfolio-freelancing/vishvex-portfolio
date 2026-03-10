@@ -86,7 +86,7 @@ export function detectHeadlessBrowser(): boolean {
   }
 
   // navigator.webdriver is set by automation tools
-  if ((navigator as Record<string, unknown>).webdriver === true) {
+  if ((navigator as unknown as Record<string, unknown>).webdriver === true) {
     return true;
   }
 
