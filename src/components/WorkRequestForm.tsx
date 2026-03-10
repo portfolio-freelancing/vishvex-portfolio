@@ -1,6 +1,14 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle } from "lucide-react";
+import {
+  sanitizeString,
+  isSuspiciousInput,
+  isValidEmail,
+  isHoneypotTriggered,
+  checkRateLimit,
+  detectHeadlessBrowser,
+} from "@/lib/security";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACn5OiIEwMl8dmHN";
 const API_ENDPOINT =
@@ -18,8 +26,9 @@ const projectTypes = [
 ];
 const currencies = ["USD", "INR", "EUR", "GBP"];
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const RATE_LIMIT_MS = 10_000;
+const RATE_LIMIT_KEY = "form_submit";
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 60_000; // 3 submissions per minute
 
 declare global {
   interface Window {
@@ -37,16 +46,18 @@ const WorkRequestForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | false>(false);
-  const lastSubmitRef = useRef<number>(0);
   const turnstileToken = useRef<string | null>(null);
   const turnstileContainerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  const formLoadTime = useRef<number>(Date.now());
 
   const onTurnstileVerify = useCallback((token: string) => {
     turnstileToken.current = token;
   }, []);
 
   useEffect(() => {
+    formLoadTime.current = Date.now();
+
     if (!turnstileContainerRef.current) return;
 
     const tryRender = () => {
@@ -76,55 +87,96 @@ const WorkRequestForm = () => {
     e.preventDefault();
     setError(false);
 
+    // ── Bot detection ──────────────────────────────────────────────
+    if (detectHeadlessBrowser()) {
+      setError("Submission blocked.");
+      return;
+    }
+
+    // Timing check: reject if form submitted in under 2 seconds (bot)
+    if (Date.now() - formLoadTime.current < 2000) {
+      setError("Please take a moment to fill out the form.");
+      return;
+    }
+
+    // ── Honeypot check ─────────────────────────────────────────────
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+
+    if (isHoneypotTriggered(data.website as string)) {
+      // Silently reject – looks like success to the bot
+      setSubmitted(true);
+      return;
+    }
+
+    // ── CAPTCHA verification ───────────────────────────────────────
     if (!turnstileToken.current) {
       setError("Please complete the CAPTCHA verification before submitting.");
       return;
     }
 
-    const now = Date.now();
-    if (now - lastSubmitRef.current < RATE_LIMIT_MS) {
-      setError("Please wait a few seconds before submitting again.");
+    // ── Rate limiting ──────────────────────────────────────────────
+    if (!checkRateLimit(RATE_LIMIT_KEY, RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_MS)) {
+      setError("Too many submissions. Please wait a minute before trying again.");
       return;
     }
 
-    const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form));
+    // ── Input sanitization & validation ────────────────────────────
+    const name = sanitizeString(data.name as string, 100);
+    const email = (data.email as string).trim().slice(0, 255);
+    const company = sanitizeString(data.company as string, 100);
+    const description = sanitizeString(data.description as string, 2000);
+    const budgetAmount = (data.budgetAmount as string).trim();
+    const currency = data.currency as string;
+    const projectType = data.projectType as string;
+    const deadline = (data.deadline as string) || "";
 
-    const name = (data.name as string).trim();
-    const email = (data.email as string).trim();
-    const company = (data.company as string).trim();
-    const description = (data.description as string).trim();
+    if (!name || name.length < 2) {
+      setError("Name is required (at least 2 characters).");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (!description || description.length < 10) {
+      setError("Description is required (at least 10 characters).");
+      return;
+    }
+    if (!budgetAmount || isNaN(Number(budgetAmount)) || Number(budgetAmount) <= 0 || Number(budgetAmount) > 10_000_000) {
+      setError("Please enter a valid budget amount.");
+      return;
+    }
+    if (!projectTypes.includes(projectType)) {
+      setError("Please select a valid project type.");
+      return;
+    }
+    if (!currencies.includes(currency)) {
+      setError("Please select a valid currency.");
+      return;
+    }
 
-    if (!name || name.length > 100) { setError("Name is required and must be under 100 characters."); return; }
-    if (!email || !EMAIL_REGEX.test(email) || email.length > 255) { setError("Please enter a valid email address."); return; }
-    if (company.length > 100) { setError("Company name must be under 100 characters."); return; }
-    if (!description || description.length > 2000) { setError("Description is required and must be under 2000 characters."); return; }
+    // ── Suspicious input detection ─────────────────────────────────
+    const allText = `${name} ${email} ${company} ${description}`;
+    if (isSuspiciousInput(allText)) {
+      setError("Your submission contains disallowed content. Please revise and try again.");
+      return;
+    }
 
     setSubmitting(true);
-    lastSubmitRef.current = now;
-
-    const budgetAmount = (data.budgetAmount as string).trim();
-    const currency = (data.currency as string);
-
-    if (!budgetAmount || isNaN(Number(budgetAmount)) || Number(budgetAmount) <= 0) {
-      setError("Please enter a valid budget amount.");
-      setSubmitting(false);
-      return;
-    }
 
     const payload = {
-      name, email, company,
-      projectType: data.projectType as string,
+      name,
+      email,
+      company,
+      projectType,
       budget: `${budgetAmount} ${currency}`,
       description,
-      deadline: (data.deadline as string) || "",
+      deadline,
       turnstileToken: turnstileToken.current,
     };
 
     try {
-      // Google Apps Script Web Apps often return cross-origin redirects/responses
-      // that are unreadable in browsers. Using `no-cors` ensures the POST is still
-      // dispatched to Apps Script; response body/status are intentionally opaque.
       await fetch(API_ENDPOINT, {
         method: "POST",
         mode: "no-cors",
@@ -133,10 +185,8 @@ const WorkRequestForm = () => {
         keepalive: true,
       });
 
-      // If fetch resolved, request was dispatched.
       setSubmitted(true);
-    } catch (err: unknown) {
-      if (import.meta.env.DEV) console.error("Form submission error:", err);
+    } catch {
       setError("Submission failed to send. Please try again.");
     } finally {
       setSubmitting(false);
@@ -192,6 +242,7 @@ const WorkRequestForm = () => {
           id="projectForm"
           onSubmit={handleSubmit}
           className="gradient-border p-8 space-y-5"
+          autoComplete="off"
         >
           <div className="grid sm:grid-cols-2 gap-5">
             <div>
@@ -201,6 +252,7 @@ const WorkRequestForm = () => {
                 required
                 type="text"
                 maxLength={100}
+                autoComplete="name"
                 className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
                 placeholder="Your name"
               />
@@ -212,6 +264,7 @@ const WorkRequestForm = () => {
                 required
                 type="email"
                 maxLength={255}
+                autoComplete="email"
                 className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
                 placeholder="you@email.com"
               />
@@ -226,6 +279,18 @@ const WorkRequestForm = () => {
               maxLength={100}
               className="w-full px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
               placeholder="Company name"
+            />
+          </div>
+
+          {/* Honeypot – hidden from real users, visible to bots */}
+          <div className="absolute" style={{ left: "-9999px", top: "-9999px" }} aria-hidden="true">
+            <label htmlFor="website">Website</label>
+            <input
+              type="text"
+              id="website"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
             />
           </div>
 
@@ -251,6 +316,7 @@ const WorkRequestForm = () => {
                   required
                   type="number"
                   min={1}
+                  max={10000000}
                   className="flex-1 px-4 py-2.5 rounded-lg bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
                   placeholder="e.g. 500"
                 />
@@ -289,7 +355,7 @@ const WorkRequestForm = () => {
           </div>
 
           {error && (
-            <p className="text-sm text-destructive text-center">{error}</p>
+            <p className="text-sm text-destructive text-center" role="alert">{error}</p>
           )}
 
           {/* Cloudflare Turnstile CAPTCHA */}
