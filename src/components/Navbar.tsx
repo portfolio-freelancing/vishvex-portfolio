@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -17,8 +18,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass" role="navigation" aria-label="Main navigation">
       <div className="container-narrow flex items-center justify-between h-16">
-        <a href="#" className="font-display text-xl font-bold gradient-text">
-          Vishvex
+        <a href="#" className="flex items-center gap-2">
+          <img src={logo} alt="Vishvex logo" className="h-8 w-8 rounded-md" />
+          <span className="font-display text-xl font-bold gradient-text">Vishvex</span>
         </a>
 
         {/* Desktop */}
