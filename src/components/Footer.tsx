@@ -1,3 +1,5 @@
+import logo from "@/assets/logo.png";
+
 const quickLinks = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
