@@ -24,7 +24,10 @@ const Footer = () => {
       <div className="container-narrow">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <span className="font-display text-xl font-bold gradient-text">Vishvex</span>
+            <div className="flex items-center gap-2">
+              <img src={logo} alt="Vishvex logo" className="h-8 w-8 rounded-md" />
+              <span className="font-display text-xl font-bold gradient-text">Vishvex</span>
+            </div>
             <p className="text-sm text-muted-foreground mt-2">
               AI-powered development agency for modern websites, automation systems, and scalable digital solutions.
             </p>
