@@ -1,0 +1,2 @@
+# 301 redirect pages.dev to canonical domain (handled by Cloudflare Pages)
+https://:project.pages.dev/* https://vishvex.online/:splat 301
