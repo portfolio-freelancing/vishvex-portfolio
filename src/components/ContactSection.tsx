@@ -1,51 +1,65 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Mail } from "lucide-react";
+import { Twitter, Linkedin, Github, Mail, ArrowRight } from "lucide-react";
 
-const links = [
-  { label: "contact@askvishvex.com", url: "mailto:contact@askvishvex.com", icon: <Mail size={20} />, isEmail: true },
-  { label: "Fiverr", url: "#", icon: <span className="text-xl">🟢</span> },
-  { label: "GitHub", url: "#", icon: <span className="text-xl">⚡</span> },
-  { label: "LinkedIn", url: "#", icon: <span className="text-xl">🔗</span> },
+const contacts = [
+  { platform: "Twitter / X", handle: "@vishvex", icon: Twitter, href: "#" },
+  { platform: "LinkedIn", handle: "Vishnu Vardhan", icon: Linkedin, href: "#" },
+  { platform: "GitHub", handle: "vishvex", icon: Github, href: "#" },
+  { platform: "Email", handle: "contact@askvishvex.com", icon: Mail, href: "mailto:contact@askvishvex.com" },
 ];
 
 const ContactSection = () => {
   return (
     <section id="contact" className="section-padding">
       <div className="container-narrow">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <span className="text-xs uppercase tracking-widest text-primary font-medium">Get In Touch</span>
-          <h2 className="text-3xl md:text-4xl font-bold font-display mt-3">
-            Let's <span className="gradient-text">Connect</span>
-          </h2>
-        </motion.div>
+        <div className="cyan-divider mb-16" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4"
-        >
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.url}
-              target={link.isEmail ? undefined : "_blank"}
-              rel={link.isEmail ? undefined : "noopener noreferrer"}
-              className="glow-card gradient-border px-8 py-4 flex items-center gap-3 group"
-            >
-              {link.icon}
-              <span className="font-medium">{link.label}</span>
-              {!link.isEmail && <ExternalLink size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />}
-            </a>
-          ))}
-        </motion.div>
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+          {/* Left */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6 }}
+            className="lg:w-[45%]"
+          >
+            <span className="eyebrow">Contact</span>
+            <h2 className="font-display font-[700] text-4xl md:text-5xl mt-3 mb-4 text-foreground leading-tight">
+              Let's Build<br />
+              <span className="gradient-text">Something.</span>
+            </h2>
+            <p className="font-body mb-4" style={{ color: "#6b6b8a" }}>
+              Have a project in mind? Let's talk about how we can bring your idea to life with AI.
+            </p>
+            <p className="font-body text-sm" style={{ color: "#6b6b8a" }}>
+              Or email: <span style={{ color: "#00f5ff" }}>contact@askvishvex.com</span>
+            </p>
+          </motion.div>
+
+          {/* Right — 2x2 grid */}
+          <div className="lg:w-[55%] grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {contacts.map((c, i) => (
+              <motion.a
+                key={c.platform}
+                href={c.href}
+                target={c.platform === "Email" ? undefined : "_blank"}
+                rel={c.platform === "Email" ? undefined : "noopener noreferrer"}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: i * 0.08 }}
+                className="group glow-card p-6 flex flex-col gap-4"
+              >
+                <c.icon size={32} style={{ color: "#00f5ff" }} />
+                <div>
+                  <h3 className="font-display font-[700] text-base text-foreground">{c.platform}</h3>
+                  <p className="text-sm font-body" style={{ color: "#6b6b8a" }}>{c.handle}</p>
+                </div>
+                <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: "#00f5ff" }} />
+              </motion.a>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
