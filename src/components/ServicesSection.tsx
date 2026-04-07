@@ -1,85 +1,75 @@
 import { motion } from "framer-motion";
-import { Globe, Brain, Palette, Rocket, Code, Workflow, Plug, Cog } from "lucide-react";
+import { Brain, Workflow, Code, Cpu, Globe, Plug, MessageSquare, TrendingUp, ArrowRight } from "lucide-react";
 
 const services = [
-  {
-    icon: Brain,
-    title: "AI Development & Prompt Engineering",
-    description: "We design intelligent AI solutions and prompt engineering systems that power smart applications, automation workflows, and scalable digital products.",
-  },
-  {
-    icon: Globe,
-    title: "Website Development",
-    description: "We build fast, modern, and responsive websites optimized for performance, SEO, and conversion-focused user experiences.",
-  },
-  {
-    icon: Code,
-    title: "Web Application Development",
-    description: "Custom web applications and SaaS platforms designed for scalability, security, and high-performance digital experiences.",
-  },
-  {
-    icon: Workflow,
-    title: "n8n Workflow Automation",
-    description: "We build powerful automation workflows using n8n to connect APIs, AI tools, databases, and business applications. Our automation systems reduce manual work, streamline operations, and help businesses scale faster.",
-  },
-  {
-    icon: Cog,
-    title: "Automation Systems",
-    description: "Automation solutions that streamline workflows, reduce manual tasks, and improve productivity through smart integrations and digital systems.",
-  },
-  {
-    icon: Plug,
-    title: "API Integration",
-    description: "Seamless API integrations connecting third-party platforms, payment systems, and automation tools to create powerful digital ecosystems.",
-  },
-  {
-    icon: Palette,
-    title: "UI / UX Design",
-    description: "Clean and modern user interface design focused on usability, engagement, and seamless digital experiences.",
-  },
-  {
-    icon: Rocket,
-    title: "Website Deployment & Cloud Hosting",
-    description: "Professional website deployment with domain setup, cloud hosting configuration, performance optimization, and secure infrastructure.",
-  },
+  { icon: Brain, title: "AI Agents", description: "Autonomous AI agents that reason, act, and integrate with your business tools.", large: true },
+  { icon: Workflow, title: "Automation Workflows", description: "n8n and custom automation pipelines that eliminate manual work.", large: false },
+  { icon: Code, title: "SaaS Development", description: "Scalable SaaS platforms built for growth.", large: false },
+  { icon: Cpu, title: "Prompt Engineering", description: "Optimized prompts for reliable AI outputs.", large: false },
+  { icon: Globe, title: "Web Development", description: "Modern, fast, responsive websites.", large: false },
+  { icon: Plug, title: "API Integrations", description: "Connect platforms, payments, and data sources seamlessly.", large: true },
+  { icon: MessageSquare, title: "Chatbot Development", description: "Intelligent chatbots for support, sales, and lead qualification.", large: false },
+  { icon: TrendingUp, title: "Lead Generation", description: "AI-powered systems that capture and qualify leads automatically.", large: false },
 ];
 
 const ServicesSection = () => {
   return (
     <section id="services" className="section-padding" aria-labelledby="services-heading">
       <div className="container-narrow">
+        <div className="cyan-divider mb-16" />
+
+        {/* Header — left aligned with right link */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4"
         >
-          <span className="text-xs uppercase tracking-widest text-primary font-medium">What We Do</span>
-          <h2 id="services-heading" className="text-3xl md:text-4xl font-bold font-display mt-3">
-            AI & Software <span className="gradient-text">Development Services</span>
-          </h2>
+          <div>
+            <span className="eyebrow">What We Do</span>
+            <h2 id="services-heading" className="font-display font-[700] text-3xl md:text-4xl mt-3 text-foreground">
+              Services
+            </h2>
+            <p className="font-body text-sm mt-2 max-w-md" style={{ color: "#6b6b8a" }}>
+              End-to-end AI and software development for startups and businesses.
+            </p>
+          </div>
+          <div
+            onClick={() => document.getElementById("work-request")?.scrollIntoView({ behavior: "smooth" })}
+            className="flex items-center gap-2 text-sm font-display font-[700] cursor-pointer"
+            style={{ color: "#00f5ff" }}
+            role="button"
+            tabIndex={0}
+          >
+            All Services <ArrowRight size={14} />
+          </div>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {services.map((service, i) => (
-            <motion.article
+            <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glow-card gradient-border p-6 group cursor-default"
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: i * 0.08 }}
+              className={`glow-card p-6 cursor-default ${service.large ? "sm:col-span-2" : ""}`}
             >
               <div
-                className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
-                style={{ background: "var(--gradient-primary)" }}
+                className="w-12 h-12 lg:w-16 lg:h-16 rounded-md flex items-center justify-center mb-4"
+                style={{ background: "rgba(0,245,255,0.08)", border: "1px solid rgba(0,245,255,0.15)" }}
               >
-                <service.icon size={22} className="text-primary-foreground" />
+                <service.icon size={service.large ? 28 : 22} style={{ color: "#00f5ff" }} />
               </div>
-              <h3 className="font-display font-semibold text-lg mb-2">{service.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
-            </motion.article>
+              <h3 className="font-display font-[700] text-lg mb-1 text-foreground">{service.title}</h3>
+              {service.large && (
+                <p className="text-sm font-body leading-relaxed" style={{ color: "#6b6b8a" }}>
+                  {service.description}
+                </p>
+              )}
+            </motion.div>
           ))}
         </div>
       </div>

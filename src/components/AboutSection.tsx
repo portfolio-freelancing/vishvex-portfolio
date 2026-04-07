@@ -1,62 +1,87 @@
 import { motion } from "framer-motion";
-import { User, Cpu, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
+const facts = [
+  { label: "College", value: "CBIT" },
+  { label: "Batch", value: "2025–2029" },
+  { label: "Founded", value: "Lord eSports" },
+  { label: "Role", value: "AI/ML Engineer" },
+];
+
+const badges = ["AI Developer", "Prompt Engineer", "Full Stack", "Automation"];
 
 const AboutSection = () => {
   return (
     <section id="about" className="section-padding" aria-labelledby="about-heading">
       <div className="container-narrow">
+        <div className="cyan-divider mb-16" />
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="grid md:grid-cols-2 gap-16 items-center"
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col lg:flex-row gap-16 items-start"
         >
-          <div>
-            <span className="text-xs uppercase tracking-widest text-primary font-medium">About Us</span>
-            <h2 id="about-heading" className="text-3xl md:text-4xl font-bold font-display mt-3 mb-6">
-              A Modern <span className="gradient-text">Development Agency</span>
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              Vishvex is a modern AI-powered development agency that builds websites, AI tools, workflow automations, and automation systems for startups, creators, and businesses. We combine cutting-edge AI development with clean design to deliver powerful digital solutions and scalable software products.
-            </p>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <Cpu size={18} className="text-primary" />
-                <span className="text-sm text-muted-foreground">AI Development</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Zap size={18} className="text-neon" />
-                <span className="text-sm text-muted-foreground">Automation</span>
-              </div>
+          {/* Left — visual */}
+          <div className="lg:w-[45%] flex justify-center lg:justify-start relative">
+            <div
+              className="w-48 h-48 md:w-56 md:h-56 rounded-lg flex items-center justify-center font-display font-[800] text-7xl md:text-8xl select-none"
+              style={{
+                background: "var(--gradient-primary)",
+                transform: "rotate(-3deg)",
+                color: "rgba(255,255,255,0.9)",
+              }}
+            >
+              VV
+            </div>
+            {/* Floating badges */}
+            <div className="absolute -bottom-4 right-4 lg:right-auto lg:-right-4 flex flex-wrap gap-2 max-w-[200px]">
+              {badges.map((b) => (
+                <span
+                  key={b}
+                  className="text-xs px-3 py-1 rounded-md font-body"
+                  style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#00f5ff" }}
+                >
+                  {b}
+                </span>
+              ))}
             </div>
           </div>
 
-          <div className="gradient-border p-8">
-            <div className="flex items-center gap-4 mb-6">
-              <div
-                className="w-16 h-16 rounded-xl flex items-center justify-center"
-                style={{ background: "var(--gradient-primary)" }}
-              >
-                <User size={28} className="text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-display font-semibold text-lg">Vishnu Vardhan Nayak</h3>
-                <p className="text-sm text-muted-foreground">Founder, Vishvex</p>
-              </div>
-            </div>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-              AI Developer and Prompt Engineer with a passion for building intelligent digital solutions. Specializing in creating AI-powered tools, modern websites, and automation systems that help businesses scale.
+          {/* Right — text */}
+          <div className="lg:w-[55%]">
+            <span className="eyebrow">About</span>
+            <h2 id="about-heading" className="font-display font-[700] text-3xl md:text-4xl mt-3 mb-6 text-foreground">
+              The Builder Behind <span className="gradient-text">the Agency</span>
+            </h2>
+            <p className="font-body mb-4 leading-relaxed" style={{ color: "#6b6b8a" }}>
+              Vishnu Vardhan Nayak is an AI/ML engineering student and the founder of Vishvex — a modern AI development agency. With a deep passion for building intelligent systems, he creates tools that automate, optimize, and scale businesses.
             </p>
-            <div className="flex gap-2 flex-wrap">
-              {["AI Developer", "Prompt Engineer", "Full Stack"].map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-3 py-1 rounded-full border border-border text-muted-foreground"
-                >
-                  {tag}
-                </span>
+            <p className="font-body mb-4 leading-relaxed" style={{ color: "#6b6b8a" }}>
+              Beyond tech, Vishnu founded Lord eSports, combining his strategic mindset with competitive gaming. He specializes in prompt engineering, workflow automation, and full-stack development.
+            </p>
+            <p className="font-body mb-8 leading-relaxed" style={{ color: "#6b6b8a" }}>
+              Currently pursuing his degree at CBIT (2025–2029), he's building the future of AI-powered solutions one project at a time.
+            </p>
+
+            {/* 2x2 facts grid */}
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              {facts.map((f) => (
+                <div key={f.label} className="p-3 rounded-md" style={{ background: "#0f0f1a", border: "1px solid #1e1e35" }}>
+                  <div className="text-xs font-body mb-1" style={{ color: "#6b6b8a" }}>{f.label}</div>
+                  <div className="font-display font-[700] text-sm text-foreground">{f.value}</div>
+                </div>
               ))}
+            </div>
+
+            <div
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              className="inline-flex items-center gap-2 text-sm font-display font-[700] cursor-pointer transition-colors duration-250"
+              style={{ color: "#00f5ff" }}
+              role="button"
+              tabIndex={0}
+            >
+              View Full Profile <ArrowRight size={14} />
             </div>
           </div>
         </motion.div>
