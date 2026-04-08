@@ -34,7 +34,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 glass" role="navigation" aria-label="Main navigation" style={{ height: 60 }}>
       <div className="container-narrow flex items-center justify-between h-[60px]">
         <a href="#" className="flex items-center gap-0">
-          <span className="font-display text-[28px] font-[800]" style={{ color: "#00f5ff" }}>VX</span>
+          <span className="font-display text-[28px] font-[800]" style={{ color: "#00f5ff" }}>V</span>
           <span className="font-display text-[28px] font-[800] text-foreground">ishvex</span>
         </a>
 

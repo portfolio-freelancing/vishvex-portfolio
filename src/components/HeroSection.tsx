@@ -93,7 +93,7 @@ const HeroSection = () => {
               className="text-lg font-body max-w-[480px] mb-8 mx-auto lg:mx-0"
               style={{ color: "#6b6b8a" }}
             >
-              Vishvex is an AI-powered software development agency specializing in AI agents, automation workflows, and scalable digital platforms for businesses and startups.
+              Vishvex is an AI-powered software development agency specializing in AI agents, automation workflows,website development and scalable digital platforms for businesses and startups.
             </motion.p>
 
             <motion.div
