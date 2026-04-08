@@ -32,7 +32,7 @@ const ContactSection = () => {
               Have a project in mind? Let's talk about how we can bring your idea to life with AI.
             </p>
             <p className="font-body text-sm" style={{ color: "#6b6b8a" }}>
-              Or email: <span style={{ color: "#00f5ff" }}>contact@askvishvex.com</span>
+              Or email: <span style={{ color: "#00f5ff" }}>contact@askvishvex.online</span>
             </p>
           </motion.div>
 
