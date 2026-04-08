@@ -3,8 +3,8 @@ import { Twitter, Linkedin, Github, Mail, ArrowRight } from "lucide-react";
 
 const contacts = [
   { platform: "Twitter / X", handle: "@vishvex", icon: Twitter, href: "#" },
-  { platform: "LinkedIn", handle: "Vishnu Vardhan", icon: Linkedin, href: "#" },
-  { platform: "GitHub", handle: "vishvex", icon: Github, href: "#" },
+  { platform: "LinkedIn", handle: "Vishnu Vardhan nayak", icon: Linkedin, href: "#" },
+  { platform: "GitHub", handle: "vishnu vardhan nayak", icon: Github, href: "#" },
   { platform: "Email", handle: "contact@askvishvex.online", icon: Mail, href: "mailto:contact@askvishvex.online" },
 ];
 
