@@ -58,7 +58,7 @@ const AboutSection = () => {
               Vishvex is a modern AI development and automation agency focused on helping businesses scale through intelligent systems, high-performance websites, and workflow automation.
             </p>
             <p className="font-body mb-4 leading-relaxed" style={{ color: "#6b6b8a" }}>
-              Beyond tech, Vishnu founded Lord eSports, combining his strategic mindset with competitive gaming. He specializes in prompt engineering, workflow automation, and full-stack development.
+              Founded by Vishnu Vardhan Nayak, the agency specializes in building scalable digital solutions that automate operations, optimize lead generation, and enhance user experiences.
             </p>
             <p className="font-body mb-8 leading-relaxed" style={{ color: "#6b6b8a" }}>
               Currently pursuing his degree at CBIT (2025–2029), he's building the future of AI-powered solutions one project at a time.
