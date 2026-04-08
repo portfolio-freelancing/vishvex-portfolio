@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const facts = [
-  { label: "College", value: "CBIT" },
-  { label: "Batch", value: "2025–2029" },
-  { label: "Founded", value: "Lord eSports" },
-  { label: "Role", value: "AI/ML Engineer" },
+  { label: "Role", value: "Founder " },
+  { label: "Industries", value: "Startups & agencies" },
+  { label: "Focus", value: "Performance & Scale" },
+  { label: "We deliver", value: "Leads, Efficiency, growth" },
 ];
 
 const badges = ["AI Developer", "Prompt Engineer", "Full Stack", "Automation"];
