@@ -55,7 +55,7 @@ const AboutSection = () => {
               The Builder Behind <span className="gradient-text">the Agency</span>
             </h2>
             <p className="font-body mb-4 leading-relaxed" style={{ color: "#6b6b8a" }}>
-              Vishnu Vardhan Nayak is an AI/ML engineering student and the founder of Vishvex — a modern AI development agency. With a deep passion for building intelligent systems, he creates tools that automate, optimize, and scale businesses.
+              Vishvex is a modern AI development and automation agency focused on helping businesses scale through intelligent systems, high-performance websites, and workflow automation.
             </p>
             <p className="font-body mb-4 leading-relaxed" style={{ color: "#6b6b8a" }}>
               Beyond tech, Vishnu founded Lord eSports, combining his strategic mindset with competitive gaming. He specializes in prompt engineering, workflow automation, and full-stack development.
