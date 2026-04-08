@@ -32,7 +32,7 @@ const AboutSection = () => {
                 color: "rgba(255,255,255,0.9)",
               }}
             >
-              VV
+              VVN
             </div>
             {/* Floating badges */}
             <div className="absolute -bottom-4 right-4 lg:right-auto lg:-right-4 flex flex-wrap gap-2 max-w-[200px]">
