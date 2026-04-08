@@ -60,10 +60,8 @@ const AboutSection = () => {
             <p className="font-body mb-4 leading-relaxed" style={{ color: "#6b6b8a" }}>
               Founded by Vishnu Vardhan Nayak, the agency specializes in building scalable digital solutions that automate operations, optimize lead generation, and enhance user experiences.
             </p>
-            <p className="font-body mb-8 leading-relaxed" style={{ color: "#6b6b8a" }}>
-              With expertise in AI development, automation systems, API integrations, and full-stack web development, Vishvex delivers end-to-end solutions tailored for startups, agencies, and growing businesses.
-              {"\n\n\n"}
-              Every solution is designed with one goal in mind — to save time, increase efficiency, and drive measurable growth.
+            <p className="font-body mb-8 leading-relaxed whitespace-pre-line" style={{ color: "#6b6b8a" }}>
+              With expertise in AI development, automation systems, API integrations, and full-stack web development, Vishvex delivers end-to-end solutions tailored for startups, agencies, and growing businesses.{"\n\n\n"}Every solution is designed with one goal in mind — to save time, increase efficiency, and drive measurable growth.
             </p>
 
             {/* 2x2 facts grid */}
