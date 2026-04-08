@@ -63,8 +63,11 @@ const Footer = () => {
               <a href="mailto:contact@askvishvex.com" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
                 contact@askvishvex.com
               </a>
-              {["GitHub", "LinkedIn", "Twitter"].map((label) => (
-                <a key={label} href="#" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
+              {[
+                { label: "GitHub", href: "https://github.com/vishnuvardhannayak108" },
+                { label: "LinkedIn", href: "https://www.linkedin.com/in/gugulothu-vishnu-vardhan-nayak-86ba42365" },
+              ].map(({ label, href }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
                   {label}
                 </a>
               ))}
