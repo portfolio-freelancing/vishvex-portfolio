@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const facts = [
-  { label: "College", value: "CBIT" },
-  { label: "Batch", value: "2025–2029" },
-  { label: "Founded", value: "Lord eSports" },
-  { label: "Role", value: "AI/ML Engineer" },
+  { label: "Role", value: "Founder " },
+  { label: "Industries", value: "Startups & agencies" },
+  { label: "Focus", value: "Performance & Scale" },
+  { label: "We deliver", value: "Leads, Efficiency, growth" },
 ];
 
 const badges = ["AI Developer", "Prompt Engineer", "Full Stack", "Automation"];
@@ -32,7 +32,7 @@ const AboutSection = () => {
                 color: "rgba(255,255,255,0.9)",
               }}
             >
-              VV
+              VVN
             </div>
             {/* Floating badges */}
             <div className="absolute -bottom-4 right-4 lg:right-auto lg:-right-4 flex flex-wrap gap-2 max-w-[200px]">
@@ -55,13 +55,13 @@ const AboutSection = () => {
               The Builder Behind <span className="gradient-text">the Agency</span>
             </h2>
             <p className="font-body mb-4 leading-relaxed" style={{ color: "#6b6b8a" }}>
-              Vishnu Vardhan Nayak is an AI/ML engineering student and the founder of Vishvex — a modern AI development agency. With a deep passion for building intelligent systems, he creates tools that automate, optimize, and scale businesses.
+              Vishvex is a modern AI development and automation agency focused on helping businesses scale through intelligent systems, high-performance websites, and workflow automation.
             </p>
             <p className="font-body mb-4 leading-relaxed" style={{ color: "#6b6b8a" }}>
-              Beyond tech, Vishnu founded Lord eSports, combining his strategic mindset with competitive gaming. He specializes in prompt engineering, workflow automation, and full-stack development.
+              Founded by Vishnu Vardhan Nayak, the agency specializes in building scalable digital solutions that automate operations, optimize lead generation, and enhance user experiences.
             </p>
-            <p className="font-body mb-8 leading-relaxed" style={{ color: "#6b6b8a" }}>
-              Currently pursuing his degree at CBIT (2025–2029), he's building the future of AI-powered solutions one project at a time.
+            <p className="font-body mb-8 leading-relaxed whitespace-pre-line" style={{ color: "#6b6b8a" }}>
+              With expertise in AI development, automation systems, API integrations, and full-stack web development, Vishvex delivers end-to-end solutions tailored for startups, agencies, and growing businesses.{"\n\n\n"}Every solution is designed with one goal in mind — to save time, increase efficiency, and drive measurable growth.
             </p>
 
             {/* 2x2 facts grid */}
