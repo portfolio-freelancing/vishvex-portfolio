@@ -216,16 +216,16 @@ const WorkRequestForm = () => {
             </div>
             <div>
               <label className="text-sm font-body font-medium mb-1.5 block text-foreground">Budget Amount *</label>
-              <div className="flex gap-2">
+              <div className="flex flex-row gap-2 items-stretch">
                 <input name="budgetAmount" required type="number" min={1} max={10000000}
-                  className={`${inputClass} flex-1`}
+                  className={`${inputClass} flex-[3]`}
                   style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
                   onFocus={(e) => { e.currentTarget.style.borderColor = "#00f5ff"; e.currentTarget.style.boxShadow = "0 0 0 2px rgba(0,245,255,0.2)"; }}
                   onBlur={(e) => { e.currentTarget.style.borderColor = "#1e1e35"; e.currentTarget.style.boxShadow = "none"; }}
                   placeholder="e.g. 500"
                 />
                 <select name="currency" required
-                  className={`${inputClass} w-24`}
+                  className={`${inputClass} flex-1`}
                   style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
                   onFocus={(e) => { e.currentTarget.style.borderColor = "#00f5ff"; e.currentTarget.style.boxShadow = "0 0 0 2px rgba(0,245,255,0.2)"; }}
                   onBlur={(e) => { e.currentTarget.style.borderColor = "#1e1e35"; e.currentTarget.style.boxShadow = "none"; }}
