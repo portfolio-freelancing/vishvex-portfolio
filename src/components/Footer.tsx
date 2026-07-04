@@ -51,11 +51,18 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-[700] text-sm mb-3 text-foreground">Services</h4>
+            <h4 className="font-display font-[700] text-sm mb-3 text-foreground">Industries</h4>
             <ul className="flex flex-col gap-2">
-              {footerServices.map((service) => (
+              {industries.map((ind) => (
+                <li key={ind.href}>
+                  <a href={ind.href} className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
+                    {ind.label}
+                  </a>
+                </li>
+              ))}
+              {footerServices.slice(0, 5).map((service) => (
                 <li key={service}>
-                  <a href="#services" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
+                  <a href="/#services" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
                     {service}
                   </a>
                 </li>
