@@ -16,7 +16,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navLinks.map(l => l.href.replace("#", ""));
+      const sections = navLinks.map(l => (l.href.split("#")[1] ?? ""));
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el && el.getBoundingClientRect().top <= 120) {
@@ -45,10 +45,10 @@ const Navbar = () => {
               key={link.href}
               href={link.href}
               className="relative text-sm font-body transition-colors duration-250"
-              style={{ color: activeSection === link.href.replace("#", "") ? "#00f5ff" : "#6b6b8a" }}
+              style={{ color: activeSection === (link.href.split("#")[1] ?? "") ? "#00f5ff" : "#6b6b8a" }}
             >
               {link.label}
-              {activeSection === link.href.replace("#", "") && (
+              {activeSection === (link.href.split("#")[1] ?? "") && (
                 <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{ background: "#00f5ff" }} />
               )}
             </a>
