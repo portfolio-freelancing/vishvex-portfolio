@@ -54,7 +54,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="#work-request"
+            href="/#work-request"
             className="px-5 py-2 rounded-md text-sm font-medium font-body transition-all duration-250 border"
             style={{
               borderColor: "#00f5ff",
@@ -101,13 +101,13 @@ const Navbar = () => {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className="text-sm font-body transition-colors"
-                  style={{ color: activeSection === link.href.replace("#", "") ? "#00f5ff" : "#6b6b8a" }}
+                  style={{ color: activeSection === (link.href.split("#")[1] ?? "") ? "#00f5ff" : "#6b6b8a" }}
                 >
                   {link.label}
                 </a>
               ))}
               <a
-                href="#work-request"
+                href="/#work-request"
                 onClick={() => setOpen(false)}
                 className="px-5 py-2 rounded-md text-sm font-medium text-center border"
                 style={{ borderColor: "#00f5ff", color: "#00f5ff" }}
