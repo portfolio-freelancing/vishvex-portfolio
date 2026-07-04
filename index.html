@@ -129,6 +129,113 @@
       "areaServed": "Worldwide"
     }
     </script>
+
+    <!-- JSON-LD: LocalBusiness (Hyderabad) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://vishvex.online/#localbusiness",
+      "name": "Vishvex",
+      "image": "https://vishvex.online/logo.png",
+      "url": "https://vishvex.online",
+      "email": "contact@askvishvex.online",
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "addressCountry": "IN"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 17.3850, "longitude": 78.4867 },
+      "areaServed": [
+        { "@type": "City", "name": "Hyderabad" },
+        { "@type": "Country", "name": "India" }
+      ],
+      "founder": { "@type": "Person", "name": "Vishnu Vardhan Nayak" },
+      "sameAs": [
+        "https://www.linkedin.com/in/gugulothu-vishnu-vardhan-nayak-86ba42365",
+        "https://github.com/vishnuvardhannayak108"
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD: Service catalog for India -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "AI Automation & n8n Workflow Development",
+      "provider": { "@id": "https://vishvex.online/#localbusiness" },
+      "areaServed": { "@type": "Country", "name": "India" },
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Coaching centres, real estate agents, clinics, SMBs"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI Automation Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Agents & Chatbots" }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "n8n Workflow Automation" }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lead Generation Systems" }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Web Development" }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "API Integrations" }},
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WhatsApp Business API Automation" }}
+        ]
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: Homepage FAQ (AEO / AI Overviews) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does AI automation cost for a small business in India?",
+          "acceptedAnswer": { "@type": "Answer", "text": "AI automation projects for Indian SMBs typically range from ₹25,000 for a single-workflow n8n automation to ₹2,00,000+ for a full AI agent with CRM, WhatsApp and payment integrations. Vishvex offers fixed-scope packages starting at ₹25,000 so coaching centres, clinics and real estate agents can start small and scale." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is n8n and why use it over Zapier or Make?",
+          "acceptedAnswer": { "@type": "Answer", "text": "n8n is an open-source workflow automation tool that connects apps and APIs like Zapier or Make, but can be self-hosted and priced per workflow instead of per task. For Indian SMBs running thousands of monthly automations, n8n usually costs 5–10x less than Zapier at the same volume." }
+        },
+        {
+          "@type": "Question",
+          "name": "How can a coaching centre use AI automation?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Coaching centres use AI automation to auto-respond to enquiries on WhatsApp and Instagram, qualify leads by course interest, send fee reminders, schedule demo classes, track attendance and follow up with drop-offs. A single n8n workflow can replace 15+ hours of admin work per week." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can AI chatbots book clinic appointments automatically?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. An AI chatbot integrated with Google Calendar or a clinic management system can collect patient details, check doctor availability, confirm slots, send WhatsApp reminders and reschedule cancellations without staff intervention. Vishvex builds these for clinics in India starting at ₹40,000." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do real estate agents automate lead follow-up?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Real estate agents automate follow-up by connecting Meta and Google lead forms to a WhatsApp AI agent that qualifies budget, location and BHK preference, then routes hot leads to the agent's phone and drips property matches for warm leads over 30 days." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between an AI agent and a chatbot?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A chatbot follows scripted rules and answers FAQs. An AI agent uses an LLM to reason, decide and take actions — like booking a meeting, updating a CRM or querying a database — based on the user's intent, without hard-coded flows for every case." }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to build a custom AI automation?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A single-workflow n8n automation ships in 5–7 days. A multi-channel AI agent with WhatsApp, CRM and payment integrations takes 3–4 weeks. Vishvex delivers an MVP within 2 weeks and iterates weekly after." }
+        },
+        {
+          "@type": "Question",
+          "name": "Who owns the automation code and data after delivery?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The client owns 100% of workflows, code and data. Vishvex delivers self-hosted n8n instances on the client's own server or cloud, with full admin credentials. No vendor lock-in." }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
