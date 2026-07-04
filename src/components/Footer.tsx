@@ -1,8 +1,14 @@
 const quickLinks = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Contact", href: "/#contact" },
+];
+
+const industries = [
+  { label: "Coaching Centre Automation", href: "/coaching-automation" },
+  { label: "Real Estate Automation", href: "/real-estate-automation" },
+  { label: "Clinic Automation", href: "/clinic-automation" },
 ];
 
 const footerServices = [
