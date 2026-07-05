@@ -11,16 +11,6 @@ const industries = [
   { label: "Clinics", href: "/clinic-automation" },
 ];
 
-const footerServices = [
-  "AI Agents",
-  "Automation Workflows",
-  "SaaS Development",
-  "Web Development",
-  "Prompt Engineering",
-  "API Integrations",
-  "Chatbots",
-  "Lead Generation",
-];
 
 const Footer = () => {
   return (
