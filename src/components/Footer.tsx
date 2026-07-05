@@ -6,21 +6,11 @@ const quickLinks = [
 ];
 
 const industries = [
-  { label: "Coaching Centre Automation", href: "/coaching-automation" },
-  { label: "Real Estate Automation", href: "/real-estate-automation" },
-  { label: "Clinic Automation", href: "/clinic-automation" },
+  { label: "Coaching Centres", href: "/coaching-automation" },
+  { label: "Real Estate", href: "/real-estate-automation" },
+  { label: "Clinics", href: "/clinic-automation" },
 ];
 
-const footerServices = [
-  "AI Agents",
-  "Automation Workflows",
-  "SaaS Development",
-  "Web Development",
-  "Prompt Engineering",
-  "API Integrations",
-  "Chatbots",
-  "Lead Generation",
-];
 
 const Footer = () => {
   return (
@@ -57,13 +47,6 @@ const Footer = () => {
                 <li key={ind.href}>
                   <a href={ind.href} className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
                     {ind.label}
-                  </a>
-                </li>
-              ))}
-              {footerServices.slice(0, 5).map((service) => (
-                <li key={service}>
-                  <a href="/#services" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
-                    {service}
                   </a>
                 </li>
               ))}
