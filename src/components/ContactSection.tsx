@@ -5,7 +5,7 @@ const contacts = [
   { platform: "Twitter / X", handle: "@vishvex", icon: Twitter, href: "#" },
   { platform: "LinkedIn", handle: "Vishnu Vardhan nayak", icon: Linkedin, href: "https://www.linkedin.com/in/vishnu-vardhan-nayak-gugulothu-86ba42365" },
   { platform: "GitHub", handle: "vishnu vardhan nayak", icon: Github, href: "https://github.com/vishnuvardhannayak108" },
-  { platform: "Email", handle: "contact@askvishvex.online", icon: Mail, href: "mailto:contact@askvishvex.online" },
+  { platform: "Email", handle: "contact@vishvex.online", icon: Mail, href: "mailto:contact@vishvex.online" },
 ];
 
 const ContactSection = () => {
@@ -32,7 +32,7 @@ const ContactSection = () => {
               Have a project in mind? Let's talk about how we can bring your idea to life with AI.
             </p>
             <p className="font-body text-sm" style={{ color: "#6b6b8a" }}>
-              Or email: <span style={{ color: "#00f5ff" }}>contact@askvishvex.online</span>
+              Or email: <span style={{ color: "#00f5ff" }}>contact@vishvex.online</span>
             </p>
           </motion.div>
 

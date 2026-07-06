@@ -56,8 +56,8 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-[700] text-sm mb-3 text-foreground">Connect</h4>
             <div className="flex flex-col gap-2">
-              <a href="mailto:contact@askvishvex.com" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
-                contact@askvishvex.com
+              <a href="mailto:contact@vishvex.online" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
+                contact@vishvex.online
               </a>
               {[
                 { label: "GitHub", href: "https://github.com/vishnuvardhannayak108" },
