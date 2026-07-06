@@ -61,7 +61,7 @@ const Footer = () => {
               </a>
               {[
                 { label: "GitHub", href: "https://github.com/vishnuvardhannayak108" },
-                { label: "LinkedIn", href: "https://www.linkedin.com/in/gugulothu-vishnu-vardhan-nayak-86ba42365" },
+                { label: "LinkedIn", href: "https://www.linkedin.com/in/vishnu-vardhan-nayak-gugulothu-86ba42365" },
               ].map(({ label, href }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
                   {label}
