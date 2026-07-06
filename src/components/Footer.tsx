@@ -8,7 +8,7 @@ const quickLinks = [
 const industries = [
   { label: "Coaching Centres", href: "/coaching-automation" },
   { label: "Real Estate", href: "/real-estate-automation" },
-  { label: "Clinics", href: "/clinic-automation" },
+  { label: "Clinics & Doctors", href: "/clinic-automation" },
 ];
 
 
