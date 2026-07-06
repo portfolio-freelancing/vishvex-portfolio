@@ -23,7 +23,7 @@ const ClinicAutomation = () => (
     ]}
     bestFor="Single-doctor clinics, dental practices, dermatology, physiotherapy, IVF, eye-care and multi-specialty chains in India handling 100+ appointments per month. Works with existing clinic management software via API or CSV sync."
     faqs={[
-      { q: "How much does clinic automation cost in India?", a: "Vishvex clinic automation starts at ₹40,000 for a single-doctor appointment bot and scales to ₹2,00,000 for a multi-branch chain with EMR sync, intake, follow-up and reporting." },
+      { q: "How much does clinic automation cost in India?", a: "Pricing is scoped per project based on your clinic size, number of doctors, integrations and workflows needed. We share a fixed quote after a free 20-minute consultation call — no monthly SaaS lock-in." },
       { q: "Is patient data safe?", a: "Yes. Workflows run on your own self-hosted n8n instance with encrypted storage and TLS. We follow DPDP Act 2023 guidelines and can restrict AI data flow to India-region models on request." },
       { q: "Which clinic management systems do you integrate with?", a: "Practo Ray, Cliniify, HealthPlix, DrCloud, Google Calendar, Google Sheets and any system with a REST API, webhook or CSV export/import." },
       { q: "Can the AI handle regional languages?", a: "Yes — English, Hindi, Telugu, Tamil, Kannada, Marathi and Bengali. Patients get replies in whichever language they message in." },

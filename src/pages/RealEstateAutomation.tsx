@@ -23,7 +23,7 @@ const RealEstateAutomation = () => (
     ]}
     bestFor="Real estate agents, channel partners and brokerages in Hyderabad, Bangalore, Mumbai, Pune, Delhi NCR handling 50+ leads per month from Meta/Google ads, 99acres, MagicBricks or Housing.com. Ideal for residential, commercial and plot sales."
     faqs={[
-      { q: "How much does real estate automation cost?", a: "Vishvex real estate automation starts at ₹30,000 for a solo agent lead-qualification bot and scales to ₹1,75,000 for a full brokerage stack with multi-agent routing, inventory sync and reporting." },
+      { q: "How much does real estate automation cost?", a: "Pricing is scoped per project based on your lead volume, team size, CRM integrations and workflows needed. We share a fixed quote after a free 20-minute consultation call — no monthly SaaS lock-in." },
       { q: "Which lead sources can you connect?", a: "Meta Lead Ads, Google Lead Form Extensions, 99acres, MagicBricks, Housing.com, Sulekha, website forms, and any source with a webhook. All feed into one WhatsApp AI agent." },
       { q: "Can the AI handle multiple languages?", a: "Yes. The AI agent handles English, Hindi and regional languages including Telugu, Tamil, Kannada and Marathi in the same conversation." },
       { q: "Will leads know it's an AI?", a: "The agent introduces itself as your assistant. Response quality is close to a human tele-caller, and hot leads are handed to a human within minutes." },

@@ -145,11 +145,11 @@ const NicheLanding = ({
           {/* Pricing */}
           <section className="mt-16">
             <h2 className="font-display font-[700] text-2xl md:text-3xl text-foreground">
-              How much does it cost?
+              Choose your scope
             </h2>
             <p className="mt-3 font-body text-foreground">
               <strong>
-                Projects start at {pricing[0].price} and scale with scope. Fixed-scope packages, no hidden fees, code and workflows fully owned by you.
+                Fixed-scope packages, no hidden fees, code and workflows fully owned by you. Get a custom quote based on your scope.
               </strong>
             </p>
             <div className="grid sm:grid-cols-3 gap-4 mt-6">
@@ -158,12 +158,20 @@ const NicheLanding = ({
                   <div className="text-xs font-body uppercase tracking-wider" style={{ color: "#00f5ff" }}>
                     {p.tier}
                   </div>
-                  <div className="font-display font-[800] text-xl mt-1 text-foreground">{p.price}</div>
-                  <p className="text-sm font-body mt-2" style={{ color: "#6b6b8a" }}>
+                  <p className="text-sm font-body mt-3" style={{ color: "#6b6b8a" }}>
                     {p.includes}
                   </p>
                 </div>
               ))}
+            </div>
+            <div className="mt-6">
+              <a
+                href="/#work-request"
+                className="inline-block px-6 py-3 rounded-md font-body font-medium text-sm"
+                style={{ background: "#00f5ff", color: "#080810" }}
+              >
+                Get a Quote <ArrowRight size={14} className="inline ml-1" />
+              </a>
             </div>
           </section>
 
