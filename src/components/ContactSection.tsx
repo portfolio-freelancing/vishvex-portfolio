@@ -3,7 +3,7 @@ import { Twitter, Linkedin, Github, Mail, ArrowRight } from "lucide-react";
 
 const contacts = [
   { platform: "Twitter / X", handle: "@vishvex", icon: Twitter, href: "#" },
-  { platform: "LinkedIn", handle: "Vishnu Vardhan nayak", icon: Linkedin, href: "https://www.linkedin.com/in/gugulothu-vishnu-vardhan-nayak-86ba42365" },
+  { platform: "LinkedIn", handle: "Vishnu Vardhan nayak", icon: Linkedin, href: "https://www.linkedin.com/in/vishnu-vardhan-nayak-gugulothu-86ba42365" },
   { platform: "GitHub", handle: "vishnu vardhan nayak", icon: Github, href: "https://github.com/vishnuvardhannayak108" },
   { platform: "Email", handle: "contact@askvishvex.online", icon: Mail, href: "mailto:contact@askvishvex.online" },
 ];
