@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import CoachingAutomation from "./pages/CoachingAutomation";
 import RealEstateAutomation from "./pages/RealEstateAutomation";
 import ClinicAutomation from "./pages/ClinicAutomation";
+import AnalyticsTracker from "./components/AnalyticsTracker";
 import { useDomainRedirect } from "./hooks/useDomainRedirect";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <AnalyticsTracker />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/coaching-automation" element={<CoachingAutomation />} />
