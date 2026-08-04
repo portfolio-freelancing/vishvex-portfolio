@@ -9,22 +9,16 @@ import {
   checkRateLimit,
   detectHeadlessBrowser,
 } from "@/lib/security";
+import { serviceTitles } from "@/data/services";
 
 const TURNSTILE_SITE_KEY = "0x4AAAAAACn5OiIEwMl8dmHN";
 const API_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbx4-Si3ifPt5DP0_sILD0NnoQR2dJdu-FD1RkNYtGsDUduNlaOogrElNJx_dvo48ic8/exec";
 
-const projectTypes = [
-  "AI Development & Prompt Engineering",
-  "Website Development",
-  "Web Application Development",
-  "n8n Workflow Automation",
-  "Automation Systems",
-  "API Integration",
-  "UI / UX Design",
-  "Website Deployment & Cloud Hosting",
-];
+// Kept in sync automatically with the Services section
+const projectTypes = serviceTitles;
 const currencies = ["USD", "INR", "EUR", "GBP"];
+
 
 const RATE_LIMIT_KEY = "form_submit";
 const RATE_LIMIT_MAX = 3;
