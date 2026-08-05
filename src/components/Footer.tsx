@@ -1,3 +1,5 @@
+import logo from "@/assets/vishvex-logo.png";
+
 const quickLinks = [
   { label: "About", href: "/#about" },
   { label: "Services", href: "/#services" },
@@ -11,29 +13,35 @@ const industries = [
   { label: "Clinics & Doctors", href: "/clinic-automation" },
 ];
 
-
 const Footer = () => {
   return (
-    <footer className="px-4 py-12" role="contentinfo">
+    <footer className="px-4 sm:px-6 lg:px-8 py-14" role="contentinfo">
       <div className="container-narrow">
-        <div className="cyan-divider mb-10" />
+        <div className="hairline mb-10" />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
           <div>
-            <div className="flex items-center gap-0 mb-3">
-              <span className="font-display text-[22px] font-[800]" style={{ color: "#00f5ff" }}>VX</span>
-              <span className="font-display text-[22px] font-[800] text-foreground">ishvex</span>
+            <div className="flex items-center gap-2 mb-4">
+              <img src={logo} alt="" width={28} height={28} className="w-7 h-7 object-contain" />
+              <span className="font-display text-[20px] font-[700] tracking-[-0.02em] text-foreground">
+                Vishvex
+              </span>
             </div>
-            <p className="text-sm font-body" style={{ color: "#6b6b8a" }}>
-              AI-powered development agency for modern websites, automation systems, and scalable digital solutions.
+            <p className="text-sm font-body text-muted-foreground">
+              An AI operations studio installing agents, automation and web systems into real
+              businesses.
             </p>
           </div>
 
           <div>
-            <h4 className="font-display font-[700] text-sm mb-3 text-foreground">Quick Links</h4>
-            <nav className="flex flex-col gap-2" aria-label="Footer navigation">
+            <h2 className="eyebrow mb-4">Navigate</h2>
+            <nav className="flex flex-col gap-2.5" aria-label="Footer navigation">
               {quickLinks.map((link) => (
-                <a key={link.href} href={link.href} className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors"
+                >
                   {link.label}
                 </a>
               ))}
@@ -41,11 +49,14 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-[700] text-sm mb-3 text-foreground">Industries</h4>
-            <ul className="flex flex-col gap-2">
+            <h2 className="eyebrow mb-4">Industries</h2>
+            <ul className="flex flex-col gap-2.5">
               {industries.map((ind) => (
                 <li key={ind.href}>
-                  <a href={ind.href} className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
+                  <a
+                    href={ind.href}
+                    className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors"
+                  >
                     {ind.label}
                   </a>
                 </li>
@@ -54,16 +65,25 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-[700] text-sm mb-3 text-foreground">Connect</h4>
-            <div className="flex flex-col gap-2">
-              <a href="mailto:contact@vishvex.online" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
+            <h2 className="eyebrow mb-4">Connect</h2>
+            <div className="flex flex-col gap-2.5">
+              <a
+                href="mailto:contact@vishvex.online"
+                className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors"
+              >
                 contact@vishvex.online
               </a>
               {[
                 { label: "GitHub", href: "https://github.com/vishnuvardhannayak108" },
                 { label: "LinkedIn", href: "https://www.linkedin.com/in/vishnu-vardhan-nayak-gugulothu-86ba42365" },
               ].map(({ label, href }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="text-sm font-body transition-colors" style={{ color: "#6b6b8a" }}>
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors"
+                >
                   {label}
                 </a>
               ))}
@@ -71,14 +91,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="cyan-divider" />
+        <div className="hairline" />
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs font-body" style={{ color: "#6b6b8a" }}>
+          <p className="text-xs font-body text-muted-foreground">
             © {new Date().getFullYear()} Vishvex. All rights reserved.
           </p>
-          <span className="text-xs px-3 py-1 rounded-md font-body" style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#6b6b8a" }}>
-            Built with AI
-          </span>
+          <span className="font-mono text-[11px] text-muted-foreground">Hyderabad, India</span>
         </div>
       </div>
     </footer>
