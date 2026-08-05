@@ -1,57 +1,61 @@
 import { motion } from "framer-motion";
 
-const row1 = ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Node.js", "Python", "PostgreSQL"];
-const row2 = ["OpenAI API", "Prompt Engineering", "n8n", "LangChain", "AI Agents", "REST APIs", "Git", "Docker", "Vercel", "Supabase"];
-
-const SkillPill = ({ name }: { name: string }) => (
-  <span
-    className="inline-flex items-center px-4 py-2 rounded-md text-sm font-body whitespace-nowrap mx-2"
-    style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
-  >
-    {name}
-  </span>
-);
+const groups = [
+  {
+    label: "Languages & Frameworks",
+    items: ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Node.js", "Python", "PostgreSQL"],
+  },
+  {
+    label: "AI & Tools",
+    items: ["OpenAI API", "Prompt Engineering", "n8n", "LangChain", "AI Agents", "REST APIs", "Git", "Docker", "Vercel", "Supabase"],
+  },
+];
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="section-padding overflow-hidden">
+    <section id="skills" className="section-padding" aria-labelledby="skills-heading">
       <div className="container-narrow">
-        <div className="cyan-divider mb-16" />
+        <div className="hairline mb-16" />
 
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.5 }}
+          className="mb-12 max-w-2xl"
         >
-          <span className="eyebrow">Expertise</span>
-          <h2 className="font-display font-[700] text-3xl md:text-4xl mt-3 text-foreground">
-            Technical <span className="gradient-text">Skills</span>
+          <span className="eyebrow">Stack</span>
+          <h2
+            id="skills-heading"
+            className="font-display font-[700] text-3xl md:text-4xl mt-4 text-foreground"
+          >
+            What we build with
           </h2>
         </motion.div>
-      </div>
 
-      {/* Marquee rows — full width */}
-      <div className="space-y-4">
-        {/* Row 1 — left */}
-        <div className="overflow-hidden">
-          <p className="eyebrow text-center mb-3">Languages & Frameworks</p>
-          <div className="flex animate-marquee-left" style={{ width: "fit-content" }}>
-            {[...row1, ...row1].map((skill, i) => (
-              <SkillPill key={`r1-${i}`} name={skill} />
-            ))}
-          </div>
-        </div>
-
-        {/* Row 2 — right */}
-        <div className="overflow-hidden">
-          <p className="eyebrow text-center mb-3">AI & Tools</p>
-          <div className="flex animate-marquee-right" style={{ width: "fit-content" }}>
-            {[...row2, ...row2].map((skill, i) => (
-              <SkillPill key={`r2-${i}`} name={skill} />
-            ))}
-          </div>
+        <div className="grid gap-10 md:grid-cols-2">
+          {groups.map((group, gi) => (
+            <motion.div
+              key={group.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: gi * 0.08 }}
+            >
+              <h3 className="eyebrow mb-4">{group.label}</h3>
+              <ul className="flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <li
+                    key={item}
+                    className="font-mono text-xs px-3 py-1.5 rounded-md text-foreground"
+                    style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))" }}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

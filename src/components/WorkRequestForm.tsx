@@ -117,10 +117,10 @@ const WorkRequestForm = () => {
     return (
       <section id="work-request" className="section-padding">
         <div className="container-narrow max-w-2xl">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="gradient-border p-12 text-center">
-            <CheckCircle size={48} style={{ color: "#00f5ff" }} className="mx-auto mb-4" />
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="surface p-12 text-center">
+            <CheckCircle size={48} style={{ color: "hsl(var(--primary))" }} className="mx-auto mb-4" />
             <h3 className="font-display text-2xl font-[700] mb-2 text-foreground">Request Sent!</h3>
-            <p className="font-body" style={{ color: "#6b6b8a" }}>We will contact you shortly.</p>
+            <p className="font-body" style={{ color: "hsl(var(--muted-foreground))" }}>We will contact you shortly.</p>
           </motion.div>
         </div>
       </section>
@@ -130,7 +130,7 @@ const WorkRequestForm = () => {
   return (
     <section id="work-request" className="section-padding">
       <div className="container-narrow max-w-2xl">
-        <div className="cyan-divider mb-16" />
+        <div className="hairline mb-16" />
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -152,7 +152,7 @@ const WorkRequestForm = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           id="projectForm"
           onSubmit={handleSubmit}
-          className="gradient-border p-6 sm:p-8 space-y-5"
+          className="surface p-6 sm:p-8 space-y-5"
           autoComplete="off"
         >
           <div className="grid sm:grid-cols-2 gap-5">
@@ -160,9 +160,9 @@ const WorkRequestForm = () => {
               <label className="text-sm font-body font-medium mb-1.5 block text-foreground">Full Name *</label>
               <input name="name" required type="text" maxLength={100} autoComplete="name"
                 className={inputClass}
-                style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = "#00f5ff"; e.currentTarget.style.boxShadow = "0 0 0 2px rgba(0,245,255,0.2)"; }}
-                onBlur={(e) => { e.currentTarget.style.borderColor = "#1e1e35"; e.currentTarget.style.boxShadow = "none"; }}
+                style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", color: "hsl(var(--foreground))" }}
+                onFocus={(e) => { e.currentTarget.style.borderColor = "hsl(var(--primary))"; e.currentTarget.style.boxShadow = "0 0 0 2px hsl(var(--primary) / 0.2)"; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = "hsl(var(--border))"; e.currentTarget.style.boxShadow = "none"; }}
                 placeholder="Your name"
               />
             </div>
@@ -170,21 +170,21 @@ const WorkRequestForm = () => {
               <label className="text-sm font-body font-medium mb-1.5 block text-foreground">Email *</label>
               <input name="email" required type="email" maxLength={255} autoComplete="email"
                 className={inputClass}
-                style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = "#00f5ff"; e.currentTarget.style.boxShadow = "0 0 0 2px rgba(0,245,255,0.2)"; }}
-                onBlur={(e) => { e.currentTarget.style.borderColor = "#1e1e35"; e.currentTarget.style.boxShadow = "none"; }}
+                style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", color: "hsl(var(--foreground))" }}
+                onFocus={(e) => { e.currentTarget.style.borderColor = "hsl(var(--primary))"; e.currentTarget.style.boxShadow = "0 0 0 2px hsl(var(--primary) / 0.2)"; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = "hsl(var(--border))"; e.currentTarget.style.boxShadow = "none"; }}
                 placeholder="you@email.com"
               />
             </div>
           </div>
 
           <div>
-            <label className="text-sm font-body font-medium mb-1.5 block text-foreground">Company <span style={{ color: "#6b6b8a" }}>(optional)</span></label>
+            <label className="text-sm font-body font-medium mb-1.5 block text-foreground">Company <span style={{ color: "hsl(var(--muted-foreground))" }}>(optional)</span></label>
             <input name="company" type="text" maxLength={100}
               className={inputClass}
-              style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
-              onFocus={(e) => { e.currentTarget.style.borderColor = "#00f5ff"; e.currentTarget.style.boxShadow = "0 0 0 2px rgba(0,245,255,0.2)"; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = "#1e1e35"; e.currentTarget.style.boxShadow = "none"; }}
+              style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", color: "hsl(var(--foreground))" }}
+              onFocus={(e) => { e.currentTarget.style.borderColor = "hsl(var(--primary))"; e.currentTarget.style.boxShadow = "0 0 0 2px hsl(var(--primary) / 0.2)"; }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = "hsl(var(--border))"; e.currentTarget.style.boxShadow = "none"; }}
               placeholder="Company name"
             />
           </div>
@@ -200,9 +200,9 @@ const WorkRequestForm = () => {
               <label className="text-sm font-body font-medium mb-1.5 block text-foreground">Project Type *</label>
               <select name="projectType" required
                 className={inputClass}
-                style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
-                onFocus={(e) => { e.currentTarget.style.borderColor = "#00f5ff"; e.currentTarget.style.boxShadow = "0 0 0 2px rgba(0,245,255,0.2)"; }}
-                onBlur={(e) => { e.currentTarget.style.borderColor = "#1e1e35"; e.currentTarget.style.boxShadow = "none"; }}
+                style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", color: "hsl(var(--foreground))" }}
+                onFocus={(e) => { e.currentTarget.style.borderColor = "hsl(var(--primary))"; e.currentTarget.style.boxShadow = "0 0 0 2px hsl(var(--primary) / 0.2)"; }}
+                onBlur={(e) => { e.currentTarget.style.borderColor = "hsl(var(--border))"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 <option value="">Select type</option>
                 {projectTypes.map((t) => <option key={t} value={t}>{t}</option>)}
@@ -213,16 +213,16 @@ const WorkRequestForm = () => {
               <div className="flex flex-row gap-2 items-stretch">
                 <input name="budgetAmount" required type="number" min={1} max={10000000}
                   className={`${inputClass} flex-[3]`}
-                  style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = "#00f5ff"; e.currentTarget.style.boxShadow = "0 0 0 2px rgba(0,245,255,0.2)"; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = "#1e1e35"; e.currentTarget.style.boxShadow = "none"; }}
+                  style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", color: "hsl(var(--foreground))" }}
+                  onFocus={(e) => { e.currentTarget.style.borderColor = "hsl(var(--primary))"; e.currentTarget.style.boxShadow = "0 0 0 2px hsl(var(--primary) / 0.2)"; }}
+                  onBlur={(e) => { e.currentTarget.style.borderColor = "hsl(var(--border))"; e.currentTarget.style.boxShadow = "none"; }}
                   placeholder="e.g. 500"
                 />
                 <select name="currency" required
                   className={`${inputClass} flex-1`}
-                  style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = "#00f5ff"; e.currentTarget.style.boxShadow = "0 0 0 2px rgba(0,245,255,0.2)"; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = "#1e1e35"; e.currentTarget.style.boxShadow = "none"; }}
+                  style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", color: "hsl(var(--foreground))" }}
+                  onFocus={(e) => { e.currentTarget.style.borderColor = "hsl(var(--primary))"; e.currentTarget.style.boxShadow = "0 0 0 2px hsl(var(--primary) / 0.2)"; }}
+                  onBlur={(e) => { e.currentTarget.style.borderColor = "hsl(var(--border))"; e.currentTarget.style.boxShadow = "none"; }}
                 >
                   {currencies.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
@@ -234,24 +234,24 @@ const WorkRequestForm = () => {
             <label className="text-sm font-body font-medium mb-1.5 block text-foreground">Project Description *</label>
             <textarea name="description" required rows={4} maxLength={2000}
               className={`${inputClass} resize-none`}
-              style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
-              onFocus={(e) => { e.currentTarget.style.borderColor = "#00f5ff"; e.currentTarget.style.boxShadow = "0 0 0 2px rgba(0,245,255,0.2)"; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = "#1e1e35"; e.currentTarget.style.boxShadow = "none"; }}
+              style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", color: "hsl(var(--foreground))" }}
+              onFocus={(e) => { e.currentTarget.style.borderColor = "hsl(var(--primary))"; e.currentTarget.style.boxShadow = "0 0 0 2px hsl(var(--primary) / 0.2)"; }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = "hsl(var(--border))"; e.currentTarget.style.boxShadow = "none"; }}
               placeholder="Tell us about your project..."
             />
           </div>
 
           <div>
-            <label className="text-sm font-body font-medium mb-1.5 block text-foreground">Deadline <span style={{ color: "#6b6b8a" }}>(optional)</span></label>
+            <label className="text-sm font-body font-medium mb-1.5 block text-foreground">Deadline <span style={{ color: "hsl(var(--muted-foreground))" }}>(optional)</span></label>
             <input name="deadline" type="date"
               className={inputClass}
-              style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#f0f0f0" }}
-              onFocus={(e) => { e.currentTarget.style.borderColor = "#00f5ff"; e.currentTarget.style.boxShadow = "0 0 0 2px rgba(0,245,255,0.2)"; }}
-              onBlur={(e) => { e.currentTarget.style.borderColor = "#1e1e35"; e.currentTarget.style.boxShadow = "none"; }}
+              style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", color: "hsl(var(--foreground))" }}
+              onFocus={(e) => { e.currentTarget.style.borderColor = "hsl(var(--primary))"; e.currentTarget.style.boxShadow = "0 0 0 2px hsl(var(--primary) / 0.2)"; }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = "hsl(var(--border))"; e.currentTarget.style.boxShadow = "none"; }}
             />
           </div>
 
-          {error && <p className="text-sm text-center font-body" style={{ color: "#ef4444" }} role="alert">{error}</p>}
+          {error && <p className="text-sm text-center font-body" style={{ color: "hsl(var(--destructive))" }} role="alert">{error}</p>}
 
           <div className="flex justify-center">
             <div ref={turnstileContainerRef} />
@@ -261,7 +261,7 @@ const WorkRequestForm = () => {
             type="submit"
             disabled={submitting}
             className="w-full py-3.5 rounded-md font-display font-[700] text-sm flex items-center justify-center gap-2 transition-all duration-250 hover:opacity-90 disabled:opacity-60"
-            style={{ background: "var(--gradient-primary)", color: "#fff" }}
+            style={{ background: "hsl(var(--primary))", color: "#fff" }}
           >
             <Send size={16} />
             {submitting ? "Sending..." : "Send Request →"}

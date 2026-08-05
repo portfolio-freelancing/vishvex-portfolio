@@ -1,68 +1,58 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { services } from "@/data/services";
-
 
 const ServicesSection = () => {
   return (
     <section id="services" className="section-padding" aria-labelledby="services-heading">
       <div className="container-narrow">
-        <div className="cyan-divider mb-16" />
+        <div className="hairline mb-16" />
 
-        {/* Header — left aligned with right link */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4"
+          transition={{ duration: 0.5 }}
+          className="mb-12 max-w-2xl"
         >
-          <div>
-            <span className="eyebrow">What We Do</span>
-            <h2 id="services-heading" className="font-display font-[700] text-3xl md:text-4xl mt-3 text-foreground">
-              Services
-            </h2>
-            <p className="font-body text-sm mt-2 max-w-md" style={{ color: "#6b6b8a" }}>
-              End-to-end AI and software development for startups and businesses.
-            </p>
-          </div>
-          <div
-            onClick={() => document.getElementById("work-request")?.scrollIntoView({ behavior: "smooth" })}
-            className="flex items-center gap-2 text-sm font-display font-[700] cursor-pointer"
-            style={{ color: "#00f5ff" }}
-            role="button"
-            tabIndex={0}
+          <span className="eyebrow">Capabilities</span>
+          <h2
+            id="services-heading"
+            className="font-display font-[700] text-3xl md:text-4xl mt-4 text-foreground"
           >
-            All Services <ArrowRight size={14} />
-          </div>
+            What we install
+          </h2>
+          <p className="font-body text-sm mt-3 text-muted-foreground">
+            Nine capabilities, one operator. Each line is the outcome you get — not the
+            technology we happen to use.
+          </p>
         </motion.div>
 
-        {/* Bento grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <ul className="border-t border-border">
           {services.map((service, i) => (
-            <motion.div
+            <motion.li
               key={service.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              className={`glow-card p-6 cursor-default ${service.large ? "sm:col-span-2" : ""}`}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4, delay: Math.min(i, 5) * 0.05 }}
+              className="group border-b border-border"
             >
-              <div
-                className="w-12 h-12 lg:w-16 lg:h-16 rounded-md flex items-center justify-center mb-4"
-                style={{ background: "rgba(0,245,255,0.08)", border: "1px solid rgba(0,245,255,0.15)" }}
-              >
-                <service.icon size={service.large ? 28 : 22} style={{ color: "#00f5ff" }} />
-              </div>
-              <h3 className="font-display font-[700] text-lg mb-1 text-foreground">{service.title}</h3>
-              {service.large && (
-                <p className="text-sm font-body leading-relaxed" style={{ color: "#6b6b8a" }}>
-                  {service.description}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-8 py-6 transition-colors duration-200 group-hover:bg-elevated px-1 sm:px-3 -mx-1 sm:-mx-3 rounded-md">
+                <div className="flex items-center gap-4 sm:w-[280px] shrink-0">
+                  <span className="w-9 h-9 rounded-md flex items-center justify-center signal-tint shrink-0">
+                    <service.icon size={16} className="text-primary" />
+                  </span>
+                  <h3 className="font-display font-[600] text-base text-foreground">
+                    {service.title}
+                  </h3>
+                </div>
+                <p className="font-body text-sm text-muted-foreground sm:pl-0 pl-[52px]">
+                  {service.outcome}
                 </p>
-              )}
-            </motion.div>
+              </div>
+            </motion.li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
