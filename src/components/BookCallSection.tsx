@@ -10,7 +10,7 @@ const benefits = [
 
 const BookCallSection = () => {
   return (
-    <section id="book-call" className="section-padding" style={{ background: "rgba(124,58,237,0.06)" }}>
+    <section id="book-call" className="section-padding" style={{ background: "hsl(var(--card))" }}>
       <div className="container-narrow max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -21,9 +21,9 @@ const BookCallSection = () => {
         >
           <span className="eyebrow">Schedule a Call</span>
           <h2 className="font-display font-[700] text-3xl md:text-4xl mt-3 text-foreground">
-            Book a Free <span className="gradient-text">Consultation</span>
+            Book a Free <span className="text-primary">Consultation</span>
           </h2>
-          <p className="font-body mt-3 max-w-xl mx-auto" style={{ color: "#6b6b8a" }}>
+          <p className="font-body mt-3 max-w-xl mx-auto" style={{ color: "hsl(var(--muted-foreground))" }}>
             Schedule a quick call to discuss your project, ideas, or requirements.
           </p>
         </motion.div>
@@ -39,9 +39,9 @@ const BookCallSection = () => {
             <div
               key={b.label}
               className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-body"
-              style={{ background: "#0f0f1a", border: "1px solid #1e1e35", color: "#6b6b8a" }}
+              style={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", color: "hsl(var(--muted-foreground))" }}
             >
-              <b.icon size={15} style={{ color: "#00f5ff" }} />
+              <b.icon size={15} style={{ color: "hsl(var(--primary))" }} />
               {b.label}
             </div>
           ))}
@@ -52,9 +52,9 @@ const BookCallSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="gradient-border p-1"
+          className="surface p-1"
         >
-          <div className="w-full rounded-md overflow-hidden" style={{ minHeight: 660, background: "#0f0f1a" }}>
+          <div className="w-full rounded-md overflow-hidden" style={{ minHeight: 660, background: "hsl(var(--card))" }}>
             <iframe
               src="https://calendly.com/askvishvex/30min?hide_gdpr_banner=1&background_color=0f0f1a&text_color=f0f0f0&primary_color=00f5ff"
               width="100%"

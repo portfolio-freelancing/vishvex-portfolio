@@ -28,7 +28,7 @@ const IndustriesSection = () => {
         <div className="text-center mb-12">
           <span
             className="inline-block text-xs font-body tracking-[0.2em] uppercase mb-3"
-            style={{ color: "#00f5ff" }}
+            style={{ color: "hsl(var(--primary))" }}
           >
             Industries We Serve
           </span>
@@ -38,7 +38,7 @@ const IndustriesSection = () => {
           >
             Built for Your Industry
           </h2>
-          <p className="font-body text-base max-w-2xl mx-auto" style={{ color: "#6b6b8a" }}>
+          <p className="font-body text-base max-w-2xl mx-auto" style={{ color: "hsl(var(--muted-foreground))" }}>
             Ready-made AI automation playbooks for the businesses we know best.
           </p>
         </div>
@@ -50,31 +50,31 @@ const IndustriesSection = () => {
               href={href}
               className="group block p-6 rounded-lg transition-all duration-300"
               style={{
-                background: "#0f0f1a",
-                border: "1px solid #1e1e35",
+                background: "hsl(var(--card))",
+                border: "1px solid hsl(var(--border))",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "#00f5ff";
+                e.currentTarget.style.borderColor = "hsl(var(--primary))";
                 e.currentTarget.style.transform = "translateY(-4px)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "#1e1e35";
+                e.currentTarget.style.borderColor = "hsl(var(--border))";
                 e.currentTarget.style.transform = "translateY(0)";
               }}
             >
               <div
                 className="w-12 h-12 rounded-md flex items-center justify-center mb-4"
-                style={{ background: "rgba(0,245,255,0.08)", border: "1px solid rgba(0,245,255,0.25)" }}
+                style={{ background: "hsl(var(--primary) / 0.08)", border: "1px solid hsl(var(--primary) / 0.25)" }}
               >
-                <Icon size={22} style={{ color: "#00f5ff" }} />
+                <Icon size={22} style={{ color: "hsl(var(--primary))" }} />
               </div>
               <h3 className="font-display text-xl font-[700] text-foreground mb-2">{title}</h3>
-              <p className="font-body text-sm mb-4" style={{ color: "#6b6b8a" }}>
+              <p className="font-body text-sm mb-4" style={{ color: "hsl(var(--muted-foreground))" }}>
                 {description}
               </p>
               <span
                 className="inline-flex items-center gap-1 text-sm font-body font-medium"
-                style={{ color: "#00f5ff" }}
+                style={{ color: "hsl(var(--primary))" }}
               >
                 Explore playbook <ArrowRight size={14} />
               </span>

@@ -96,7 +96,7 @@ const NicheLanding = ({
           {/* Direct-answer block (AEO) */}
           <div
             className="mt-6 p-5 rounded-md"
-            style={{ background: "rgba(0,245,255,0.05)", border: "1px solid rgba(0,245,255,0.2)" }}
+            style={{ background: "hsl(var(--primary) / 0.06)", border: "1px solid hsl(var(--primary) / 0.2)" }}
           >
             <p className="font-body text-base md:text-lg leading-relaxed text-foreground">
               <strong>{directAnswer}</strong>
@@ -107,14 +107,14 @@ const NicheLanding = ({
             <a
               href="/#work-request"
               className="px-6 py-3 rounded-md font-body font-medium text-sm border transition-all"
-              style={{ borderColor: "#00f5ff", color: "#080810", background: "#00f5ff" }}
+              style={{ borderColor: "hsl(var(--primary))", color: "hsl(var(--primary-foreground))", background: "hsl(var(--primary))" }}
             >
               Start a Project <ArrowRight size={14} className="inline ml-1" />
             </a>
             <a
               href="/#book-call"
               className="px-6 py-3 rounded-md font-body font-medium text-sm border transition-all"
-              style={{ borderColor: "#00f5ff", color: "#00f5ff" }}
+              style={{ borderColor: "hsl(var(--primary))", color: "hsl(var(--primary))" }}
             >
               Book a Free Call
             </a>
@@ -127,12 +127,12 @@ const NicheLanding = ({
             </h2>
             <div className="grid sm:grid-cols-2 gap-4 mt-6">
               {useCases.map((u) => (
-                <div key={u.title} className="glow-card p-5">
+                <div key={u.title} className="surface surface-hover p-5">
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 size={20} style={{ color: "#00f5ff" }} className="mt-0.5 shrink-0" />
+                    <CheckCircle2 size={20} style={{ color: "hsl(var(--primary))" }} className="mt-0.5 shrink-0" />
                     <div>
                       <h3 className="font-display font-[700] text-base text-foreground">{u.title}</h3>
-                      <p className="text-sm font-body mt-1" style={{ color: "#6b6b8a" }}>
+                      <p className="text-sm font-body mt-1" style={{ color: "hsl(var(--muted-foreground))" }}>
                         {u.description}
                       </p>
                     </div>
@@ -154,11 +154,11 @@ const NicheLanding = ({
             </p>
             <div className="grid sm:grid-cols-3 gap-4 mt-6">
               {pricing.map((p) => (
-                <div key={p.tier} className="glow-card p-5">
-                  <div className="text-xs font-body uppercase tracking-wider" style={{ color: "#00f5ff" }}>
+                <div key={p.tier} className="surface surface-hover p-5">
+                  <div className="text-xs font-body uppercase tracking-wider" style={{ color: "hsl(var(--primary))" }}>
                     {p.tier}
                   </div>
-                  <p className="text-sm font-body mt-3" style={{ color: "#6b6b8a" }}>
+                  <p className="text-sm font-body mt-3" style={{ color: "hsl(var(--muted-foreground))" }}>
                     {p.includes}
                   </p>
                 </div>
@@ -168,7 +168,7 @@ const NicheLanding = ({
               <a
                 href="/#work-request"
                 className="inline-block px-6 py-3 rounded-md font-body font-medium text-sm"
-                style={{ background: "#00f5ff", color: "#080810" }}
+                style={{ background: "hsl(var(--primary))", color: "hsl(var(--primary-foreground))" }}
               >
                 Get a Quote <ArrowRight size={14} className="inline ml-1" />
               </a>
@@ -192,9 +192,9 @@ const NicheLanding = ({
             </h2>
             <div className="mt-6 flex flex-col gap-4">
               {faqs.map((f) => (
-                <div key={f.q} className="glow-card p-5">
+                <div key={f.q} className="surface surface-hover p-5">
                   <h3 className="font-display font-[700] text-base text-foreground">{f.q}</h3>
-                  <p className="text-sm font-body mt-2 leading-relaxed" style={{ color: "#6b6b8a" }}>
+                  <p className="text-sm font-body mt-2 leading-relaxed" style={{ color: "hsl(var(--muted-foreground))" }}>
                     {f.a}
                   </p>
                 </div>
@@ -203,25 +203,25 @@ const NicheLanding = ({
           </section>
 
           {/* CTA */}
-          <section className="mt-16 p-8 rounded-md text-center" style={{ background: "rgba(0,245,255,0.05)", border: "1px solid rgba(0,245,255,0.2)" }}>
+          <section className="mt-16 p-8 rounded-md text-center" style={{ background: "hsl(var(--primary) / 0.06)", border: "1px solid hsl(var(--primary) / 0.2)" }}>
             <h2 className="font-display font-[800] text-2xl md:text-3xl text-foreground">
               Ready to automate?
             </h2>
-            <p className="mt-3 font-body" style={{ color: "#6b6b8a" }}>
+            <p className="mt-3 font-body" style={{ color: "hsl(var(--muted-foreground))" }}>
               Free 20-minute consultation. No obligation. Get a fixed quote in 48 hours.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <a
                 href="/#work-request"
                 className="px-6 py-3 rounded-md font-body font-medium text-sm"
-                style={{ background: "#00f5ff", color: "#080810" }}
+                style={{ background: "hsl(var(--primary))", color: "hsl(var(--primary-foreground))" }}
               >
                 Start a Project <ArrowRight size={14} className="inline ml-1" />
               </a>
               <a
                 href="/#book-call"
                 className="px-6 py-3 rounded-md font-body font-medium text-sm border"
-                style={{ borderColor: "#00f5ff", color: "#00f5ff" }}
+                style={{ borderColor: "hsl(var(--primary))", color: "hsl(var(--primary))" }}
               >
                 Book a Free Call
               </a>
